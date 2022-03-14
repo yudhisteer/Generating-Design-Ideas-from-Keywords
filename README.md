@@ -25,9 +25,12 @@
 4. Conditional GAN and Controllable Generation
 
 
+### 1. Understanding a Basic GAN
 
 
 
+
+#### 1.1 Generative Models
 
 
 
