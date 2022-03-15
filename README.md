@@ -97,6 +97,14 @@ We can use generative models to do ```explicit density estimation``` where we're
 </p>
 
 
+ Our generative model takes in a ```noise``` which represents a random set of values going into the generative model. The generative model can also sometimes takes in a class ```Y``` such as a dog.  From these inputs, it's goal is to generate a set of features ```X```(wet nose or a tongue sticking out. ) that look like a realistic dog.  But why do we need this noise in the first place? The noise is here to ensure that what is generated isn't actually the same image each time. Else, what is the point of generating the same image agai nand again. As explained above, gnerative models try to capture the probability distribution of ```X```, the different features of having a wet nose, the tongue sticking out, maybe pointy ears sometimes but not all the time, given that class ```Y``` of a dog. With the added noise, these models would generate realistic and diverse representations of this class ```Y```. Note: if we are only generating one class Y of a dog, then we don't need this conditioning on Y - <img src="https://latex.codecogs.com/png.image?\dpi{110}P(X|Y)" title="https://latex.codecogs.com/png.image?\dpi{110}P(X|Y)" /> - and instead it's just the probability over all the features X - <img src="https://latex.codecogs.com/png.image?\dpi{110}P(X)" title="https://latex.codecogs.com/png.image?\dpi{110}P(X)" />. If we continue to run our model multiple times without any restrictions, then we'll end up getting more pictures representing the dataset our generative model was trained on. 
+ 
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/158368054-8ca5bfd1-b41d-4f61-97e3-a71e4555718e.png" />
+</p>
+
+
 
 # Conclusion
 
