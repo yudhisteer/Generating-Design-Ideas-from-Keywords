@@ -25,7 +25,7 @@
 
 
 ### 1. Understanding a Basic GAN
-If you got a crush on any of those people below then I got a bad news for you. These people are not real! The images have actually been downloade from the website [thispersondoesnotexist.com](thispersondoesnotexist.com). It is hard to believe that an AI can generate such realistic fake images of a person in matter of seconds but that is the reality in which we are actually living. This AI face generator is powered by ```StyleGAN```, a neural network from NVIDIA developed in 2018.
+If you got a crush on any of those people below then I got a bad news for you. These people are not real! The images have actually been downloade from the website [thispersondoesnotexist.com](https://this-person-does-not-exist.com/en). It is hard to believe that an AI can generate such realistic fake images of a person in matter of seconds but that is the reality in which we are actually living. This AI face generator is powered by ```StyleGAN```, a neural network from NVIDIA developed in 2018.
 
 **Fun fact:** The main goal was to train the AI to recognize fake faces and faces in general. The company needed this to improve the performance of its video cards by automatically recognizing faces and applying other rendering algorithms to them. However, since the StyleGAN code is publicly available, an engineer at Uber was able to take it and create a random face generator that rocked the internet!
 
@@ -46,12 +46,43 @@ Pretty great, right? Now the most important question we must ask is: **How to re
 
 [whichfaceisreal.com](https://www.whichfaceisreal.com/) has been developed by Jevin West and Carl Bergstrom at the University of Washington, as part of the Calling Bullshit project, which focus on teaching people to be more analytical of potentially false portraits. I tested it and it is not that straightforward!
 
-#### 1.1 Generative Models
+#### 1.1 Types of AI
+
+I would now like to take a step  back and consider fundamentally what is the ```type``` of learning that can occur when we are training  neural networks to perform tasks such as shown above. 
+
+##### 1.1.1 Supervised Learning
+Supervised learning problems are instances in which we are given a set of ```data``` and a set of ```labels``` associated with that data and our goal is to learn a functional ```mapping``` that  moves from data to labels and those labels. And these labels can take many different types of forms. We will take examples of supervised learning relating to images.
 
 
+1. **Classification:** our input is an image and we want to output Y, a class label for the category.
+
+2. **Object detection:** our input is still an image but here we want to output the bounding boxes of instances of up to multiple dogs or cats.
+
+3. **Semantic segmentation**: we have a label for every pixel the category that every pixel belongs to.
+
+4.  **Image captioning:** our label is now a sentence and so it's now in the form of natural language.
+
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/158325846-a909b56e-53ea-4c3f-92ea-3150d233a15f.png" width="500" height="500"/>
+</p>
+
+##### 1.1.1 Unsupervised Learning
+In unsupervised learning we're given only data **no** labels and our goal is to understand or build up a representation of the hidden and underlying structure in that data to extract insights into the foundational structure of the data itself. 
+
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/158328574-edf605f7-2e85-4919-8c61-86fdd9fb4331.png" width="500" height="500"/>
+</p>
 
 
 
 # Conclusion
 
 # References
+1. https://www.youtube.com/watch?v=xkqflKC64IM&t=489s
+2. https://www.youtube.com/watch?v=CDMVaQOvtxU
+3. https://www.whichfaceisreal.com/
+4. https://this-person-does-not-exist.com/en
+5. 
+6. 
