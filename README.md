@@ -33,7 +33,7 @@ If you got a crush on any of those people below then I got a bad news for you. T
   <img src= "https://user-images.githubusercontent.com/59663734/158312102-b4e058ba-6e4b-44cf-b0e4-3d6322b4dd60.png" />
 </p>
 
-Another interesting application of GAN is ```Deepfake```. Haven't you even wondered what the movie ```American Psycho``` would look like if we had ```Tom Cruise``` as the protagonist instead of ```Christian Bale```. Here's a preview:
+Another interesting application of GAN is ```Deepfake```. Haven't you ever wondered what the movie ```American Psycho``` would look like if we had ```Tom Cruise``` as the protagonist instead of ```Christian Bale```. Here's a preview:
 
 
 <p align="center">
@@ -87,12 +87,14 @@ using any additional external labels.
 To summarize, in ```supervised``` learning we want to use ```label data``` to learn a function mapping from ```X to Y``` and in ```unsupervised``` learning we use ```no labels``` and instead we try to learn some ```underlying hidden structure``` of the data.
 
 
-#### 1.2 Generative Models
-In ```generative models``` which is a class of models for ```unsupervised learning``` where given training data our goal is to try and generate ```new samples``` from the same distribution.
+#### 1.2 Generative Models vs Discriminative Models
+In ```generative models``` which is a class of models for ```unsupervised learning``` where given training data our goal is to try and generate ```new samples``` from the same distribution. We have training data over generated from some distribution <img src="https://latex.codecogs.com/svg.image?P_{data}" title="https://latex.codecogs.com/svg.image?P_{data}" /> and we want to learn a model, <img src="https://latex.codecogs.com/svg.image?P_{model}" title="https://latex.codecogs.com/svg.image?P_{model}" /> to generate samples from the same distribution and so we want to learn <img src="https://latex.codecogs.com/svg.image?P_{model}" title="https://latex.codecogs.com/svg.image?P_{model}" /> to be similar to <img src="https://latex.codecogs.com/svg.image?P_{data}" title="https://latex.codecogs.com/svg.image?P_{data}" />. Hence, it has the capability of creating data similar to the training data it received since it has learnt the distribution from which the data is provided. 
 
+We can use generative models to do ```explicit density estimation``` where we're going to explicitly define and solve for our <img src="https://latex.codecogs.com/svg.image?P_{model}" title="https://latex.codecogs.com/svg.image?P_{model}" /> or we can also do ```implicit density estimation``` where in this case we'll learn a model that can produce samples from <img src="https://latex.codecogs.com/svg.image?P_{model}" title="https://latex.codecogs.com/svg.image?P_{model}" /> without explicitly defining it.
 
-
-
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/158363720-4a6f790c-39c1-4b0c-9c6b-3dec9d86beb7.png" width="500" height="200"/>
+</p>
 
 
 
