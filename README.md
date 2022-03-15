@@ -86,6 +86,16 @@ using any additional external labels.
 
 To summarize, in ```supervised``` learning we want to use ```label data``` to learn a function mapping from ```X to Y``` and in ```unsupervised``` learning we use ```no labels``` and instead we try to learn some ```underlying hidden structure``` of the data.
 
+
+#### 1.2 Generative Models
+In ```generative models``` which is a class of models for ```unsupervised learning``` where given training data our goal is to try and generate ```new samples``` from the same distribution.
+
+
+
+
+
+
+
 # Conclusion
 
 # References
