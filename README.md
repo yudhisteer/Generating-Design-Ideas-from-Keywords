@@ -106,7 +106,7 @@ We can use generative models to do ```explicit density estimation``` where we're
 
 There are many types of generative models. The most popular ones are ```Variational Autoencoders (VAE)``` or ```GANs```.
 
-##### 1.2.1 Variational Autoencoders
+##### 1.2.1 Autoencoders
 Variational Autoencoders are related to a type of unsupervised learning model called ```autoencoders```. With autoencoders we don't generate data, but it's an unsupervised approach for learning a ```lower dimensional``` feature representation from unlabeled training data. We feed in as input raw data for example an image that's going to be  passed through many successive deep neural network layers. At the output of that succession  of neural network layers we are going to generate a low dimensional latent space - a ```feature representation```. We call this portion of the network an ```encoder``` since it's mapping the data ```x``` into a encoded  vector of latent variables ```z```.
 
 **Note:** It is important to ensure the low dimensionality of this latent space ```z``` so that we are able to compress the data into a small latent vector where we can learn a very compact and rich feature representation. We want to learn features that can capture meaningful factors of variation in the data.
@@ -122,8 +122,27 @@ To train such a model we need to learn a decoder network that will actually reco
   <img src= "https://user-images.githubusercontent.com/59663734/158853576-5e4c7943-9fa3-413d-bedf-adff62825924.png" />
 </p>
 
+**Note:** Notice that by using this reconstruction loss - the difference between the reconstructed output and our original input - we do not require any labels for our data beyond the data itself. It is just using the raw data to supervise itself.
 
-To sum up, we are going to take our input data, pass it through our ```encoder``` first` which can be like a three layer ```convolutional``` network, to get these features and then we're going to pass it through a ```decoder``` which is a three layer for example upconvolutionalnetwork and then get a reconstructed data out at the end of this. The reason why we have a convolutional network for the encoder and an upconvolutional network for the decoder is because at the encoder we're basically taking it from this high dimensional input to these lower dimensional features and now we want to go the other way go from our low dimensional features back out to our high dimensional reconstructed input.
+In practice, the  lower the dimensionality of our latent space, the poorer and worse quality reconstruction we're going to get out. These autoencoder structures use this sort of bottlenecking hidden layer to learn a compressed  latent representation of the data and we can  self-supervise the training of this network by using a reconstruction loss that forces the autoencoder network to encode as much information about the data as possible into a lower dimensional latent space while still being able to build up faithful reconstructions.
+
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/158857249-767cc6fd-f3c2-42f4-be5b-f3f19a32c7a0.png" width="500" height="200"/>
+</p>
+
+
+
+
+To sum up, we are going to take our input data, pass it through our **encoder** first` which can be like a three layers **convolutional** network, to get these features and then we're going to pass it through a **decoder** which is a three layers of **upconvolutionalnetwork** and then get a reconstructed data out at the end of this. The reason why we have a convolutional network for the encoder and an upconvolutional network for the decoder is because at the encoder we're basically taking it from this high dimensional input to these lower dimensional features and now we want to go the other way go from our low dimensional features back out to our high dimensional reconstructed input.
+
+##### 1.2.2 Variational Autoencoders
+In autoencoders, this latent layer is just a normal layer in a neural network just like any other layer.  It is ```deterministic```. If we're going to feed in a particular input to this network we're going  to get the same output so long as the weights are the same. Therefore, effectively a traditional autoencoder learns this deterministic encoding which allows for reconstruction and reproduction of the input.
+
+
+In Variational Autoencoders we inject some ```noise``` into this whole model and training process. Instead of having the encoder encode the image into a single point in that latent space, the encoder actually encodes the image onto a whole distribution and then samples a point on that distribution to feed into the decoder to then produce a realistic image. This adds a little bit of noise since different points can be sampled on this distribution. 
+
+
 
 
 
