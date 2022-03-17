@@ -104,6 +104,28 @@ We can use generative models to do ```explicit density estimation``` where we're
   <img src= "https://user-images.githubusercontent.com/59663734/158368054-8ca5bfd1-b41d-4f61-97e3-a71e4555718e.png" />
 </p>
 
+There are many types of generative models. The most popular ones are ```Variational Autoencoders (VAE)``` or ```GANs```.
+
+##### 1.2.1 Variational Autoencoders
+Variational Autoencoders are related to a type of unsupervised learning model called ```autoencoders```. With autoencoders we don't generate data, but it's an unsupervised approach for learning a ```lower dimensional``` feature representation from unlabeled training data. We feed in as input raw data for example an image that's going to be  passed through many successive deep neural network layers. At the output of that succession  of neural network layers we are going to generate a low dimensional latent space - a ```feature representation```. We call this portion of the network an ```encoder``` since it's mapping the data ```x``` into a encoded  vector of latent variables ```z```.
+
+**Note:** It is important to ensure the low dimensionality of this latent space ```z``` so that we are able to compress the data into a small latent vector where we can learn a very compact and rich feature representation. We want to learn features that can capture meaningful factors of variation in the data.
+
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/158852280-5d3d1777-fbe8-45f6-8e8f-a0d708105409.png" />
+</p>
+
+To train such a model we need to learn a decoder network that will actually reconstruct the original image. Again for the decoder we are basically using same types of networks as encoders so it's usually a little bit symmetric. We call our reconstructed output <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{x}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{x}" />  because it's our prediction and it's an imperfect reconstruction of our input ```x``` and the way that we can actually train this network is by looking at the original input ```x``` and our reconstructed output  <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{x}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{x}" /> and simply comparing the two and minimizing the distance between these two images using ```L2 loss function```.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/158853576-5e4c7943-9fa3-413d-bedf-adff62825924.png" />
+</p>
+
+
+To sum up, we are going to take our input data, pass it through our ```encoder``` first` which can be like a three layer ```convolutional``` network, to get these features and then we're going to pass it through a ```decoder``` which is a three layer for example upconvolutionalnetwork and then get a reconstructed data out at the end of this. The reason why we have a convolutional network for the encoder and an upconvolutional network for the decoder is because at the encoder we're basically taking it from this high dimensional input to these lower dimensional features and now we want to go the other way go from our low dimensional features back out to our high dimensional reconstructed input.
+
+
 
 
 # Conclusion
