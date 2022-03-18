@@ -153,6 +153,10 @@ Our encoder is now going to be trying to learn a probability distribution of the
 **To sum up:** In Variational Autoencoders we inject some ```noise``` into this whole model and training process. Instead of having the encoder encode the image into a single point in that latent space, the encoder actually encodes the image onto a whole distribution and then samples a point on that distribution to feed into the decoder to then produce a realistic image. This adds a little bit of noise since different points can be sampled on this distribution. 
 
 
+##### 1.2.3 GANs
+Another instance of generative models is GANs where we don't want to explicitly model the density or the distribution underlying some data but instead just learn a ```representation``` that can be successful in generating new instances that are similar to the data.
+
+
 # Conclusion
 
 # References
