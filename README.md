@@ -173,6 +173,27 @@ GANs are composed of two neural networks models: a ```generator``` which generat
 
 With time we reach a point where we don't need the discriminator anyemore. The generator can take in any random noise and produce a realistic image. Note that The generator's role in some sense it's very similar to the decoder in the ```VAE```. What's different is that there's no guiding encoder this time that determines what noise vector should look like, that's input into the generator. Instead, there's a discriminator looking at fake and real images and simultaneously trying to figure out which ones are real and which ones are fake. Overall the effect is that the discriminator is going to get better and better at learning how to classify real and fake data and the better it becomes at doing that it's going to force the generator to try to produce better and better synthetic data to  try to fool the discriminator and so on.
 
+##### 1.2.5 Intuition behind GANs
+As exaplained above, the generator learns to generate fakes that look real, to fool the discriminator. And the discriminator learns to distinguish between what's real and what's fake. So you can think of the generator as a painting forger and the discriminator as an art inspector. So the generator forges fake images to try to look as realistic as possible, and it does this in the hopes of fooling the discriminator. 
+
+
+https://user-images.githubusercontent.com/59663734/159158982-e8931b4b-9e79-411c-94d0-328eb9057ba7.mp4
+
+
+
+
+So you can see here Starry Night and Scream, they look pretty good. Meanwhile the discriminator here looks for a pile of both real famous paintings and the fake ones created by the generator
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Conclusion
