@@ -200,20 +200,24 @@ https://user-images.githubusercontent.com/59663734/159166914-406d3b01-8c66-4122-
 
 6. When the generator produces a batch of paintings, the generator will know in what direction to go on and improve by looking at the ```scores``` assigned to her work by the discriminator.
 
+7. Once again the discriminator is now going to receive these new points and it's going to estimate a probability that each of these points is real and again learn to decrease the probability of the fake points being real further and further. 
+
 <p align="center">
   <img src= "https://user-images.githubusercontent.com/59663734/159172289-5badead4-2768-4f6b-8ae6-be75431e1a3e.png" />
 </p>
-
-7. Once again the discriminator is now going to receive these new points and it's going to estimate a probability that each of these points is real and again learn to decrease the probability of the fake points being real further and further. 
 
 8. Eventually, the generator is going to start moving these fake points closer and closer to the real data such that the fake data are almost following the distribution of the real data. It is going to be really really hard for the discriminator to effectively  distinguish between what is real and what is fake while the generator is going to continue to try to create fake data instances to fool the discriminator.
 
 9. The discriminator also improves over time because it receives more and more realistic images at each round from the generator. Essentially it tries to develop a keener and keener eye as these images get better.
 
+10. When the discriminator says that the image created by the generator is 60% real. We actually that it's wrong that it's not necessarily real, that it's actually fake. And then after many rounds the generator, will start producing paintings that are harder and harder to distinguish if not impossible for the discriminator to distinguish from the real ones. Training ends when the first neural network begins to constantly deceive the second.
+
 
 <p align="center">
   <img src= "https://user-images.githubusercontent.com/59663734/159173036-b0228b7f-abcd-480d-ba6a-847ecd9bafde.png" />
 </p>
+
+To summarize how we train GANs: the generator is going to try to synthesize fake instances to fool the discriminator which is going to be trained to identify the synthesized instances and discriminate these as fake.
 
 
 
