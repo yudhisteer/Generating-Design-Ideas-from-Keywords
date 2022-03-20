@@ -174,23 +174,46 @@ GANs are composed of two neural networks models: a ```generator``` which generat
 With time we reach a point where we don't need the discriminator anyemore. The generator can take in any random noise and produce a realistic image. Note that The generator's role in some sense it's very similar to the decoder in the ```VAE```. What's different is that there's no guiding encoder this time that determines what noise vector should look like, that's input into the generator. Instead, there's a discriminator looking at fake and real images and simultaneously trying to figure out which ones are real and which ones are fake. Overall the effect is that the discriminator is going to get better and better at learning how to classify real and fake data and the better it becomes at doing that it's going to force the generator to try to produce better and better synthetic data to  try to fool the discriminator and so on.
 
 ##### 1.2.5 Intuition behind GANs
-As exaplained above, the generator learns to generate fakes that look real, to fool the discriminator. And the discriminator learns to distinguish between what's real and what's fake. So you can think of the generator as a painting forger and the discriminator as an art inspector. So the generator forges fake images to try to look as realistic as possible, and it does this in the hopes of fooling the discriminator. 
+As exaplained above, the generator learns to generate fakes that look real, to fool the discriminator. And the discriminator learns to distinguish between what's real and what's fake. So you can think of the generator as a painting forger and the discriminator as an art inspector. So the generator forges fake images to try to look as realistic as possible, and it does this in the hopes of fooling the discriminator. So we can think of the generator as a painting forger and the discriminator as an art inspector. So the generator forges fake images to try to look as realistic as possible, and it does this in the hopes of fooling the discriminator.
+
+The video below really depicts how a GAN works. ```Geoffrey Rush``` plays an ```art inspector``` which can detect fake portraits in a split of a second in the movie ```The Best Offer```. Geoffrey Rush can be seen as the discriminator in our GAN.
 
 P.S. Sound on for the video below.
 
 https://user-images.githubusercontent.com/59663734/159166914-406d3b01-8c66-4122-9b31-1ad33af48a2d.mp4
 
 
+1. The generator is  going to start from some completely ```random noise``` and produce ```fake data```. At the beginning of this game, the generator actually isn't very sophisticated. It doesn't know how to produce real looking artwork. Additionally, the generator isn't allowed to see the real images. It doesn't know how this painting should even look. So at the very beginning, the elementary generator initially just paint a masterpiece of **scribbles**.
+
+
+2. The discriminator is going to see the fake data from the Generator as well as ```real data```  that we would feed in and then it's going  to be trained to output a probability that the data it sees are real or fake. 
+
+3. If it decides an image to be real then we can actually tell it ```yes``` that's ```real``` or ```no``` that's ```fake```. This way we can get a discriminator that's able to **differentiate** a poorly drawn image like this, from the ones that are slightly better and eventually also the real ones. 
+
+4. In the beginning it's not going to be trained accurately so the predictions are not going to be mediocre but then we're going to train it till it starts increasing the probabilities of real versus not real appropriately such that we get this perfect separation where the discriminator is able to perfectly distinguish  what is real and what is fake.
 
 <p align="center">
   <img src= "https://user-images.githubusercontent.com/59663734/159167795-a1f75871-dc12-4c21-8bac-f3e7f150fadd.png" />
 </p>
 
+5. The generator take instances of where the real data lies as inputs to train and then it's going to  try to improve its imitation of the data trying to move the fake data that is generated closer and closer to the real data.
+
+6. When the generator produces a batch of paintings, the generator will know in what direction to go on and improve by looking at the ```scores``` assigned to her work by the discriminator.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159172289-5badead4-2768-4f6b-8ae6-be75431e1a3e.png" />
+</p>
+
+7. Once again the discriminator is now going to receive these new points and it's going to estimate a probability that each of these points is real and again learn to decrease the probability of the fake points being real further and further. 
+
+8. Eventually, the generator is going to start moving these fake points closer and closer to the real data such that the fake data are almost following the distribution of the real data. It is going to be really really hard for the discriminator to effectively  distinguish between what is real and what is fake while the generator is going to continue to try to create fake data instances to fool the discriminator.
+
+9. The discriminator also improves over time because it receives more and more realistic images at each round from the generator. Essentially it tries to develop a keener and keener eye as these images get better.
 
 
-
-
-
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159173036-b0228b7f-abcd-480d-ba6a-847ecd9bafde.png" />
+</p>
 
 
 
