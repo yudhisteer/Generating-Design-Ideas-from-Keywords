@@ -113,13 +113,13 @@ Variational Autoencoders are related to a type of unsupervised learning model ca
 
 
 <p align="center">
-  <img src= "https://user-images.githubusercontent.com/59663734/158852280-5d3d1777-fbe8-45f6-8e8f-a0d708105409.png" />
+  <img src= "https://user-images.githubusercontent.com/59663734/158852280-5d3d1777-fbe8-45f6-8e8f-a0d708105409.png" width="250" height="200"/>
 </p>
 
 To train such a model we need to learn a decoder network that will actually reconstruct the original image. Again for the decoder we are basically using same types of networks as encoders so it's usually a little bit symmetric. We call our reconstructed output <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{x}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{x}" />  because it's our prediction and it's an imperfect reconstruction of our input ```x``` and the way that we can actually train this network is by looking at the original input ```x``` and our reconstructed output  <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{x}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{x}" /> and simply comparing the two and minimizing the distance between these two images using ```L2 loss function```.
 
 <p align="center">
-  <img src= "https://user-images.githubusercontent.com/59663734/158853576-5e4c7943-9fa3-413d-bedf-adff62825924.png" />
+  <img src= "https://user-images.githubusercontent.com/59663734/158853576-5e4c7943-9fa3-413d-bedf-adff62825924.png" width="600" height="300"/>
 </p>
 
 **Note:** Notice that by using this reconstruction loss - the difference between the reconstructed output and our original input - we do not require any labels for our data beyond the data itself. It is just using the raw data to supervise itself.
@@ -142,7 +142,7 @@ In autoencoders, this latent layer is just a normal layer in a neural network ju
 Variational auto encoders impose a ```stochastic``` or variational twist on this architecture. The idea behind doing so is to generate smoother representations of the input data and improve the quality of not only the reconstructions but also to actually generate new images that are similar to the input data set  but not direct reconstructions of the input data. Variational autoencoders replace that deterministic layer ```z``` with a stochastic sampling operation. Instead of learning the  latent variables ```z``` directly for each variable, the variational autoencoder learns a ```mean``` and  a ```variance``` associated with that latent variable. And the mean and variance parameterize a ```probability distribution``` for that latent variable. We can actually generate new data instances by ```sampling``` from the distribution defined by these <img src="https://latex.codecogs.com/svg.image?\mu&space;_{s}" title="https://latex.codecogs.com/svg.image?\mu _{s}" /> and <img src="https://latex.codecogs.com/svg.image?\sigma&space;_{s}" title="https://latex.codecogs.com/svg.image?\sigma _{s}" /> to generate a latent sample and get  probabilistic representations of the latent space.
 
 <p align="center">
-  <img src= "https://user-images.githubusercontent.com/59663734/158946396-0caa3e82-da4d-42cd-9615-c1a6206ded2c.png" />
+  <img src= "https://user-images.githubusercontent.com/59663734/158946396-0caa3e82-da4d-42cd-9615-c1a6206ded2c.png" width="600" height="300"/>
 </p>
 
 
@@ -153,8 +153,26 @@ Our encoder is now going to be trying to learn a probability distribution of the
 **To sum up:** In Variational Autoencoders we inject some ```noise``` into this whole model and training process. Instead of having the encoder encode the image into a single point in that latent space, the encoder actually encodes the image onto a whole distribution and then samples a point on that distribution to feed into the decoder to then produce a realistic image. This adds a little bit of noise since different points can be sampled on this distribution. 
 
 
-##### 1.2.3 GANs
-Another instance of generative models is GANs where we don't want to explicitly model the density or the distribution underlying some data but instead just learn a ```representation``` that can be successful in generating new instances that are similar to the data.
+##### 1.2.3 Discriminative Models
+
+
+##### 1.2.4 GANs
+Another instance of generative models is GANs where we don't want to explicitly model the density or the distribution underlying some data but instead just learn a ```representation``` that can be successful in generating new instances that are similar to the data. What we care about is to be able to sample from a ```complex high dimensional training distribution```. However, there's no direct way that we can do this. Therefore, we're going to have to build up some approximation of this distribution, i.e, we sample from simpler distributions. For example ```random noise```. We're going to learn a transformation from these simple distributions
+directly to the training distribution that we want. And to model this kind of complex function or transformation we will use a ```neural network```. To sum up, we start from something extremely simple: random noise and try to build a generative neural network that can learn a functional transformation that goes from noise to the data distribution and by learning this functional generative mapping we can then sample in order to generate fake instances synthetic instances that are going to be as close to the real data distribution.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159155369-c100201b-d2d9-4d14-a411-8a6a2618bbb9.png" width="500" height="175"/>
+</p>
+
+GANs are composed of two neural networks models: a ```generator``` which generates images like the ```decoder``` and a ```discriminator``` that's actually a ```discriminative``` model hidden inside of it. The generator and discriminator are effectively competing against each other which is why they're called ```adversarial```. The generator ```G``` is going to be trained to go from random noise to produce an imitation of the data and then the discriminator is going to take that ```synthetic fake data``` as well as ```real data``` and be trained to actually **distinguish between fake and real**. If our generator network is able to generate well and generate fake images that can successfully ```fool``` this discriminator, then we have a good generative model. This means that we're generating images that look like images from the training set. 
+
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159155621-99466a29-eb02-476d-9d9e-0a407ec28ba7.png" width="500" height="350"/>
+</p>
+
+With time we reach a point where we don't need the discriminator anyemore. The generator can take in any random noise and produce a realistic image. Note that The generator's role in some sense it's very similar to the decoder in the ```VAE```. What's different is that there's no guiding encoder this time that determines what noise vector should look like, that's input into the generator. Instead, there's a discriminator looking at fake and real images and simultaneously trying to figure out which ones are real and which ones are fake. Overall the effect is that the discriminator is going to get better and better at learning how to classify real and fake data and the better it becomes at doing that it's going to force the generator to try to produce better and better synthetic data to  try to fool the discriminator and so on.
+
 
 
 # Conclusion
