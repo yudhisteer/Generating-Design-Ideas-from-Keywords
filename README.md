@@ -6,9 +6,10 @@
 ## Methods
 ## Plan of Action
 1. Understanding a Basic GAN
-    - Generative models
-    - Discriminator
-    - Generator
+    - Types of AI
+    - Generative models vs Discriminative models
+    - The Discriminator
+    - The Generator
     - Cross Entropy Cost Function
 
 2. Deep Convolutional GANs
@@ -220,6 +221,7 @@ https://user-images.githubusercontent.com/59663734/159166914-406d3b01-8c66-4122-
 To summarize how we train GANs: the generator is going to try to synthesize fake instances to fool the discriminator which is going to be trained to identify the synthesized instances and discriminate these as fake.
 
 
+#### 1.3 The Discriminator
 
 
 
