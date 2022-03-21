@@ -249,11 +249,21 @@ We will now explore more in depth the ```discriminator``` part of the GAN. The d
 
 In the video below, Jian Yang built quite a good ```binary classifier``` which can differentiate between hot dog and not hot dog, however much to the despair of Erlich.
 
-
-
 https://user-images.githubusercontent.com/59663734/159260958-c3a00256-74f9-4e26-a01a-176e090a3519.mp4
 
+One type of model for a classifier is using a neural network and this neural network can taken some features ```X``` and a set of labels ```Y``` associated with each of our classes.. It computes a series of nonlinearities and outputs the probabilities for a set of categories. The neural network learns these set of parameters or weights theta, <img src="https://latex.codecogs.com/png.image?\dpi{110}\theta&space;" title="https://latex.codecogs.com/png.image?\dpi{110}\theta " />. These parameters data are trying to map these features X to those labels ```Y``` and those predictions are called <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}" /> because they're not exactly the exact ```Y``` labels. They're trying to be the ```Y``` labels. And so the goal is to reach a point where the difference between the true values ```Y``` and the predictions <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}" /> is minimized.
 
+A cost function is computed by comparing how closely <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}" /> is to Y. It will tell the discriminative model, the neural network, how close it is in predicting the correct class. From this cost function we can update those parameters - the nodes in that neural network according to the gradient of this cost function. This just means generally which direction those parameters should go to try to get to the right answer, to try to get to a <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}" />, that's as close as possible to ```Y```. And then we repeat this process until our classifier is in good shape.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159347060-e27b77fc-f935-4474-b301-a228c69e279c.png" width="600" height="300"/>
+</p>
+
+The goal of the discriminator is to model the probability of each class and this is a conditional probability distribution because it's predicting the probability of class Y conditioned on a certain set of features. In the GAN context the discriminator is a classifier that inspects the examples. They are fake and real examples and it determines whether they belong to the real or fake class. The discriminator models the probability of an example being fake given that set of inputs X - ```P(Fake|Features)```. In the example below, the discriminator look at the fake Mona Lisa and determine that with 85% probability this isn't the real one - 0.85 fake. So in this case, it will be classified as fake and that information of being fake along with this fakeness probability, 0.85, will be given to the generator to improve its efforts. That is, the output probabilities from the discriminator are the ones that help the generator learn to produce better looking examples overtime
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159348473-49774c75-2c36-4d56-abbf-ec3071cd2c39.png" width="600" height="200"/>
+</p>
 
 
 # Conclusion
