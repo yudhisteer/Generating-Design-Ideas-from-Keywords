@@ -251,6 +251,9 @@ In the video below, Jian Yang built quite a good ```binary classifier``` which c
 
 
 
+https://user-images.githubusercontent.com/59663734/159260958-c3a00256-74f9-4e26-a01a-176e090a3519.mp4
+
+
 
 
 # Conclusion
