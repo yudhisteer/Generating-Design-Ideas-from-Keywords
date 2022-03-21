@@ -265,6 +265,19 @@ The goal of the discriminator is to model the probability of each class and this
   <img src= "https://user-images.githubusercontent.com/59663734/159348473-49774c75-2c36-4d56-abbf-ec3071cd2c39.png" width="600" height="200"/>
 </p>
 
+#### 1.4 The Generator
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Conclusion
 
