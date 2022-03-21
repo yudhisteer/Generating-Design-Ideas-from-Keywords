@@ -12,17 +12,10 @@
     - The Generator
     - Cross Entropy Cost Function
 
-2. Deep Convolutional GANs
-
-    - Activation Functions
-    - Batch Normalization
-    - Convolutions
-
-3. Wasserstein GANs with Gradient Penalty
+2. Wasserstein GANs with Gradient Penalty
 
     - ddd
-
-4. Conditional GAN and Controllable Generation
+3. Conditional GAN and Controllable Generation
 
 
 ### 1. Understanding a Basic GAN
@@ -252,6 +245,10 @@ To summarize how we train GANs: the generator is going to try to synthesize fake
 
 
 #### 1.3 The Discriminator
+We will now explore more in depth the ```discriminator``` part of the GAN. The discriminator is a classifier whose goal is to distinguish between different classes. Given the image of a cat, the classifier should be able to tell whether it's a cat or a dog. We can have a more complex case where we want to differentiate cat from multiple classes or the simplest case where we just want to predict cat or not cat.
+
+In the video below, Jian Yang built quite a good ```binary classifier``` which can differentiate between hot dog and not hog dog, however much to the despair of Erlich.
+
 
 
 
