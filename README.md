@@ -155,6 +155,36 @@ Our encoder is now going to be trying to learn a probability distribution of the
 
 
 ##### 1.2.3 Discriminative Models
+A discriminative model is one typically used for ```classification``` in machine learning. They learn how to distinguish between classes such as dogs and cats, and are often called ```classifiers```. Discriminative models take a set of features ```X```, such as having a wet nose or whether it purrs and from these features determine a category of whether the image is of a dog or a cat. In other words, they try to model the probability of class ```Y``` given a set of features ```X``` - ```P(Y|X)```.
+
+In simple words, a discriminative model makes predictions on the unseen data based on conditional probability and can be used either for classification or regression problem statements. These models are not capable of generating new data points. Therefore, the ultimate objective of discriminative models is to separate one class from another.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159219293-8d850423-d05d-4916-88d2-3934bc14a50c.png" width="600" height="250"/>
+</p>
+
+
+Below are examples of generative and discriminative classifiers:
+
+**Generative classifiers**
+- Naïve Bayes
+- Bayesian networks
+- Markov random fields
+- Hidden Markov Models (HMM)
+
+**Discriminative Classifiers**
+- Logistic regression
+- Support Vector Machine (SVM)
+- Traditional neural networks
+- K-Nearest Neighbour (KNN)
+- Conditional Random Fields (CRF)
+
+To summarise:
+
+- Generative models model the distribution of individual classes.
+- Discriminative models learn the boundaries between classes.
+- With Generative models, we have less chance of overfitting if our data distribution is similar to real data distribution. However, outliers can affect our model performance.
+- With Discriminative models, we can work with small dataset but we should be careful of overfitting.
 
 
 ##### 1.2.4 GANs
@@ -233,5 +263,8 @@ To summarize how we train GANs: the generator is going to try to synthesize fake
 2. https://www.youtube.com/watch?v=CDMVaQOvtxU
 3. https://www.whichfaceisreal.com/
 4. https://this-person-does-not-exist.com/en
-5. 
-6. 
+5. https://www.youtube.com/watch?v=HHNESCbZqUg
+6. https://www.analyticsvidhya.com/blog/2021/07/deep-understanding-of-discriminative-and-generative-models-in-machine-learning/
+7. http://ai.stanford.edu/~ang/papers/nips01-discriminativegenerative.pdf
+8. https://medium.com/@mlengineer/generative-and-discriminative-models-af5637a66a3
+9. https://www.youtube.com/watch?v=z5UQyCESW64
