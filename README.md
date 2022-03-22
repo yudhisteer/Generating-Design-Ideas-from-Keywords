@@ -414,9 +414,9 @@ where ```y``` is the target (target probability) label which is ```1``` for real
   <img src= "https://user-images.githubusercontent.com/59663734/159466939-5e314a92-4f43-4dd8-942a-6540e763380d.png" />
 </p>
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+We notice that our cost function has two parts: one more focused on the real images and one more focused on the fake. We will now look at the function when y = 1 and when y = 0.
 
-We notice that our cost function has two parts: one more focused on the real images and one more focused on the fake. We will now look at the function when y = 1 and when y = 0:
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 **```y = 1:```**
 
