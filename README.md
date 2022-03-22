@@ -291,10 +291,15 @@ Now we are going to see the whole process of the training of the discriminator w
 8. Once we have calculated the loss we are going to use ```backpropagation``` to update the parameters, <img src="https://latex.codecogs.com/png.image?\dpi{110}\theta&space;_{d}" title="https://latex.codecogs.com/png.image?\dpi{110}\theta _{d}" /> of the discriminator only.
 
 #### 1.4 The Generator
+The generator in a GAN is like it's ```heart```. It's a model that's used to generate examples and the one that we should be investing in and helping achieve a really high performance at the end of the training process.  
 
+The generators final goal is to be able to produce examples from a certain class. So if we trained it from the class of a cat, then the generator will do some computations and output a representation of a cat that looks real.  So ideally, the generator won't output the same cat at every run, and so to ensure it's able to produce different examples every single time, we will actually input different sets of random values - a noise vector. Then this noise vector is fed in as ```input``` sometimes with our class ```Y``` for cat into the generators neural network. The generator in this neural network will compute a series of nonlinearities from those inputs and return some variables, for example, three million nodes at the end that do not necessarily represent classes but each pixel's value which represents the image of a cat.
 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159424620-4b8543c5-27ee-4d7a-aae6-61333a002a33.gif" />
+</p>
 
-
+##### 1.3.1 Training of Generator
 
 
 
