@@ -414,9 +414,9 @@ where ```y``` is the target (target probability) label which is ```1``` for real
   <img src= "https://user-images.githubusercontent.com/59663734/159466939-5e314a92-4f43-4dd8-942a-6540e763380d.png" />
 </p>
 
-We notice that our cost function has two parts: one more focused on their real images and one more focused on the fake.
+We notice that our cost function has two parts: one more focused on the real images and one more focused on the fake. We will now look at the function when y = 1 and when y = 0:
 
-1. **```y = 1:```**
+**```y = 1:```**
 
  When the label is equal to ```1``` we have only the first part of the equation which is:
  
@@ -430,8 +430,67 @@ We notice that our cost function has two parts: one more focused on their real i
   <img src= "https://latex.codecogs.com/png.image?\dpi{110}target&space;*&space;log(prediction)" title="https://latex.codecogs.com/png.image?\dpi{110}target * log(prediction)" />
 </p>
 
-2. **```y = 0:```**
+1. We see that when ```y = 0```, we output ```0```. 
+2. If we have a label of ```1``` and we have a really high prediction that is close to ```1``` -  of 0.99, then we also get a value that's close to ```0```.
+3. In the case where it actually is real, i.e, y = 1, but our prediction is terrible, and it's 0, so far from 1, you think it's fake, but it's actually real, then this value is extremely large. 
 
+This term <img src= "https://latex.codecogs.com/svg.image?y&space;*&space;log(\hat{y})" title="https://latex.codecogs.com/svg.image?y * log(\hat{y})" /> is mainly for when the prediction is actually just 1, and it makes it 0 if our prediction is good, and it makes it negative infinity if our prediction is bad.
+
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159486275-25b8ce6d-aa62-4bf7-9aab-fa2b12df949e.png" />
+</p>
+
+In this plot, we have our prediction value on the x-axis and the loss associated with that training example on the y-axis. In this case, the loss simplifies to the negative log of the prediction. When the prediction is close to ```1```, here at the tail, the loss is close to ```0``` because our prediction is close to the label. However, when the prediction is close to ```0``` out here, unfortunately our loss approaches infinity, so a really high value because the prediction and the label are very different. 
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159491019-7e513dbe-b5cf-48fd-93a1-a99f352ba741.png" />
+</p>
+
+
+**```y = 0:```**
+
+ When the label is equal to ```0``` we have only the second part of the equation which is:
+ 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159487419-8aaed528-e48d-4131-b483-8799d1d64f63.png" />
+</p>
+
+that is:
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159487659-4fa0120b-009e-4cb2-8e14-f162b9fffe0b.png" />
+</p>
+
+
+
+Similarly:
+
+1.  If our label is 1, then 1-y = 0. And if our prediction is anything, this will evaluate to ```0```.
+2.  If our prediction is close to zero and our label is 0, then this value is close to 0. 
+3.  However, if it's fake, but our prediction is really far off, and thinks it's real, then this term evaluates to negative infinity. 
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159486345-757a8e95-da6f-4fa8-97d5-c566b98f1c35.png" />
+</p>
+
+When the label is 0, and the loss function reduces to the negative log of 1 minus that prediction. Hence, when the prediction is close to 0, the loss is also close to 0. That means we're doing great. But when our prediction is closer to 1, but the ground truth is 0, it will approach infinity again.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159493911-c128212a-c25a-4253-b0b7-54726a0d3f56.png" />
+</p>
+
+
+
+
+Basically, each of these terms - <img src="https://latex.codecogs.com/png.image?\dpi{110}(1-y)*log(1-\hat{y})" title="https://latex.codecogs.com/png.image?\dpi{110}(1-y)*log(1-\hat{y})" /> and <img src="https://latex.codecogs.com/png.image?\dpi{110}(1-y)*log(1-\hat{y})" title="https://latex.codecogs.com/png.image?\dpi{110}(1-y)*log(1-\hat{y})" /> evaluates to negative infinity if for their relevant label, the prediction is really bad. 
+
+**Why do we have a negative sign in front of our cost function?**
+
+That brings us to this negative sign a little bit. If either of these values evaluates to something really big in the negative direction, then this negative sign is crucial to making sure that it becomes a positive number and positive infinity. Because for our cost function, what we typically want is a high-value being bad, and our neural network is trying to reduce this value as much as possible. Getting predictions that are closer, evaluating to ```0``` makes sense here, because we want to minimize our cost function as we learn.
+
+
+In summary, one term in the cost function is relevant when the label ```0```, the other one is relevant when it's ```1```, and in either case, the logarithm of a value between 1-0 was calculated, which returns that negative result. That's why we want this negative term at the beginning, to make sure that this is high, or greater than, or equal to 0.
 
 # Conclusion
 
