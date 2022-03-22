@@ -329,13 +329,14 @@ More generally, the generator is trying to model the probability of features X g
   <img src= "https://user-images.githubusercontent.com/59663734/159434062-433e0da7-5178-42c6-b90f-861dbbae7ea2.png" />
 </p>
 
-
-
 To summarise:
 
 - the generator produces fake data that tries to look real. 
 - It learns to mimic that distribution of features X from the class of your data. 
 - In order to produce different outputs each time it takes random features as input. 
+
+
+### 1.4 Cross Entropy Cost Function
 
 # Conclusion
 
