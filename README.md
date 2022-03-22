@@ -337,15 +337,12 @@ To summarise:
 
 
 #### 1.4 Cross Entropy Cost Function
-To understand the ```Binary Cross Entropy``` cost function, we will first explore what is entropy. So, cross-entropy is a measure of the difference between two probability distributions for a given random variable or set of events.
+To understand the ```Binary Cross Entropy``` cost function, we will first explore what is entropy. 
 
 ##### 1.4.1 Information
 First, ```information``` is defined as the number of bits required to encode and transmit an event.
-
 - Low Probability Event (**surprising**): ```More information```.
 - Higher Probability Event (**unsurprising**): ```Less information```.
-
-
 Information h(x) can be calculated for an event x, given the probability of the event P(x) as follows:
 
 <p align="center">
@@ -376,6 +373,33 @@ Entropy H(x) can be calculated for a random variable with a set of x in X discre
 <p align="center">
   <img src= "https://latex.codecogs.com/png.image?\dpi{110}H(X)&space;=&space;-\sum_{i=1}^{n}&space;P(x_{i})&space;*&space;log(P(x_{i}))" title="https://latex.codecogs.com/png.image?\dpi{110}H(X) = \sum_{i=1}^{n} P(x_{i}) * log(P(x_{i}))" />
 </p>
+
+- **Skewed Distribution**: one high probability event (0.9) and two low probability events (0.05): ```Low Entropy - Unsurprising```
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159460075-478d9837-a513-4b82-a9dd-bd0556f88fe9.png" />
+</p>
+
+- **Balanced Distribution**: all events have same probability (0.33) ```High Entropy - Surprising```
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159462252-684b32b2-7010-4aa4-bc9e-7594b1b5bc0c.png" />
+</p>
+
+##### 1.4.3 Cross Entropy
+Cross-entropy is a measure of the **difference** between two probability distributions for a given random variable or set of events.
+
+_The intuition for this definition comes if we consider a target or underlying probability distribution P and an approximation of the target distribution Q, then the cross-entropy of Q from P is the number of additional bits to represent an event using Q instead of P._
+
+The cross-entropy between two probability distributions, such as Q from P, can be stated formally as:
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159463250-bfd9e0c4-c4aa-4f59-826c-370f02cf1121.png" />
+</p>
+
+Where ```H()``` is the ```cross-entropy``` function, ```P``` may be the ```target``` distribution and ```Q``` is the ```approximation``` of the target distribution.
+
+
+##### 1.4.4 Binary Cross Entropy
 
 
 
