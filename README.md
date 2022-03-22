@@ -400,9 +400,21 @@ Where ```H()``` is the ```cross-entropy``` function, ```P``` may be the ```targe
 
 
 ##### 1.4.4 Binary Cross Entropy
+We will use Binary Cross Entropy because the discriminator wants to predict two things: real images are real and the fake images are fake. 
 
+**Recall:** Cross entropy is the product of the **target probability** times the **logarithm of the approximating probability**.
 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159465858-1c6506c8-a17a-4c69-a541-fa7c31f4d24a.png" />
+</p>
 
+where ```y``` is the target (target probability) label which is ```1``` for real and ```0``` for fake and <img src="https://latex.codecogs.com/svg.image?\hat{y}" title="https://latex.codecogs.com/svg.image?\hat{y}" /> represents the prediction (approx. probability) - the output of the discriminator. So we can see our cost function as:
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159466939-5e314a92-4f43-4dd8-942a-6540e763380d.png" />
+</p>
+
+We notice that our cost function has two parts: one more focused on their real images and one more focused on the fake.
 
 
 
