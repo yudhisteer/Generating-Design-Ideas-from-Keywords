@@ -301,13 +301,24 @@ The generators final goal is to be able to produce examples from a certain class
 
 ##### 1.3.1 Training of Generator
 
+1. We are going to begin with ```Z``` which represents a noise vector - a mathematical vector made of random numbers.
+
+2. We pass this into a generator represented by a neural network to produce a set of features that can pose as an image of a cat or an attempt at a cat. This output image,  <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{X}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{X}" /> is fake. It doesn't belong to the original real training data and we want to use it to fool the discriminator.
+
+3. This image, <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{X}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{X}" /> is fed into the discriminator, which determines how real and how fake it thinks it is based on its inspection of it.
+
+4. The discriminator output <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}_{d}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}_{d}" /> which is in the range of ```0``` to ```1``` will be used to compute a ```cost function``` that basically looks at how far the examples produced by the generator are being considered real by the discriminator because the generator wants this to seem as real as possible. That is, how good is the performance of the generator?
+
+5. The generator wants <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}_{d}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}_{d}" /> to be as close to ```1```, meaning ```real``` as possible. Whereas, the discriminator is trying to get this to be ```0``` - ```fake```.
+
+6. The cost function uses the difference between these two to then update the parameters of the generator using backpropagation. It gets to improve over time and know which direction to move it's parameters to generate something that looks more real and will fool the discriminator.
+
+7. The difference between the output of the discriminator and the value ```1``` is going to be a smaller and smaller and the loss is going to be smaller and smaller. As such, the performance of the generator is going to keep on improving.
 
 
-
-
-
-
-
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159430976-0dbff385-2417-4ed7-a2df-bb1bd0e3cddf.png" width="800" height="250"/>
+</p>
 
 # Conclusion
 
