@@ -320,6 +320,23 @@ The generators final goal is to be able to produce examples from a certain class
   <img src= "https://user-images.githubusercontent.com/59663734/159430976-0dbff385-2417-4ed7-a2df-bb1bd0e3cddf.png" width="800" height="250"/>
 </p>
 
+So once we get a generator that looks pretty good, we can save the parameters theta of the generator and then ```sample``` from this safe generator. What sampling basically means is that we have these random noise vectors and when we input that into the saved generator, it can generate all sorts of different examples. 
+
+More generally, the generator is trying to model the probability of features X given the class Y - ```P(X|Y)```. Note: if we have only one class then we dont need that class ```Y``` so we will just model ```P(X)```. For the example above, generator will model the probability of features ```X``` without any additional conditions and this is because the class ```Y``` will always be cat, so it's implicit for all probabilities ```X```. In this case, it'll try to approximate the real distribution of cats. So the most common cat breeds will actually have more chances of being generated because they're more common in the dataset. Certain features such as having pointy ears will be extra common because most cats have that. But then more rare breeds, the sphix for example, will have a less likely chance of being sampled. 
+
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159434062-433e0da7-5178-42c6-b90f-861dbbae7ea2.png" />
+</p>
+
+
+
+To summarise:
+
+- the generator produces fake data that tries to look real. 
+- It learns to mimic that distribution of features X from the class of your data. 
+- In order to produce different outputs each time it takes random features as input. 
+
 # Conclusion
 
 # References
