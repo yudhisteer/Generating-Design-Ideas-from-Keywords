@@ -336,7 +336,7 @@ To summarise:
 - In order to produce different outputs each time it takes random features as input. 
 
 
-### 1.4 Cross Entropy Cost Function
+#### 1.4 Cross Entropy Cost Function
 
 # Conclusion
 
