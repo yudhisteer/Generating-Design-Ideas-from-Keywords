@@ -337,6 +337,51 @@ To summarise:
 
 
 #### 1.4 Cross Entropy Cost Function
+To understand the ```Binary Cross Entropy``` cost function, we will first explore what is entropy. So, cross-entropy is a measure of the difference between two probability distributions for a given random variable or set of events.
+
+##### 1.4.1 Information
+First, ```information``` is defined as the number of bits required to encode and transmit an event.
+
+- Low Probability Event (**surprising**): ```More information```.
+- Higher Probability Event (**unsurprising**): ```Less information```.
+
+
+Information h(x) can be calculated for an event x, given the probability of the event P(x) as follows:
+
+<p align="center">
+  <img src= "https://latex.codecogs.com/png.image?\dpi{110}h(x)&space;=&space;-log(P(x))" title="https://latex.codecogs.com/png.image?\dpi{110}h(x) = -log(P(x))" />
+</p>
+
+- Low Probability Event: P(x) = **0.1** | h(x) = -log(0.1) = **1** : More information
+- Higher Probability Event: P(x) = **0.9** | h(x) = -log(0.9) = **0.045** : Less information
+
+Figure below shows a - log(x) graph.
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159455785-b1559ee6-8b9a-404a-a3a4-236e298d4ee9.png" width="450" height="300"/>
+</p>
+
+**Note:**
+Imagine that we are encoding a particular event. If the probability of that event happening is low, this means that it is more surprising, because we are not sure when it is going to happen. And we will also need to use more bits to encode it because we need to encode a more surprising pattern, which has more variation and requires more bits to be expressed.
+
+Conversely, if we know that the event happens very often, with high probability, then it will be less surprising because we are almost sure that it is going to happen next time we check. And that high probability event has less information because we require less bits to express a pattern that happens almost always or always in contrast to a pattern that is more unexpected and complex.
+
+##### 1.4.2 Entropy
+Now let's explore entropy. ```Entropy``` is the number of bits required to transmit a randomly selected event from a probability distribution. 
+
+- Skewed Probability Distribution (**unsurprising**): ```Low entropy```.
+- Balanced Probability Distribution (**surprising**): ```High entropy```.
+
+Entropy H(x) can be calculated for a random variable with a set of x in X discrete states discrete states and their probability P(x) as follows:
+
+<p align="center">
+  <img src= "https://latex.codecogs.com/png.image?\dpi{110}H(X)&space;=&space;-\sum_{i=1}^{n}&space;P(x_{i})&space;*&space;log(P(x_{i}))" title="https://latex.codecogs.com/png.image?\dpi{110}H(X) = \sum_{i=1}^{n} P(x_{i}) * log(P(x_{i}))" />
+</p>
+
+
+
+
+
+
 
 # Conclusion
 
@@ -350,3 +395,4 @@ To summarise:
 7. http://ai.stanford.edu/~ang/papers/nips01-discriminativegenerative.pdf
 8. https://medium.com/@mlengineer/generative-and-discriminative-models-af5637a66a3
 9. https://www.youtube.com/watch?v=z5UQyCESW64
+10. https://machinelearningmastery.com/cross-entropy-for-machine-learning/
