@@ -265,6 +265,31 @@ The goal of the discriminator is to model the probability of each class and this
   <img src= "https://user-images.githubusercontent.com/59663734/159348473-49774c75-2c36-4d56-abbf-ec3071cd2c39.png" width="600" height="200"/>
 </p>
 
+##### 1.3.1 Training of Discriminator
+Now we are going to see the whole process of the training of the discriminator which incorporates the output from the generator as well:
+
+1. To train a discriminator we take a noise vector ```Z``` and pass it through the generator.
+
+2. The generator produces a fake output, <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{X}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{X}" />.
+
+3. We also take a set of real images, <img src="https://latex.codecogs.com/png.image?\dpi{110}X" title="https://latex.codecogs.com/png.image?\dpi{110}X" /> from the original dataset and input both into the discriminator.
+
+4. The discriminator is going to receive a set of both fake and real images and produce outputs <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}" />.
+
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159412761-baaf867f-54ba-4e8a-9a49-6ba6ba126745.png" width="800" height="270"/>
+</p>
+
+
+5. The output <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}" /> has a range from ```0``` to ```1``` where ```0``` represents the event of a fake image and ```1``` the maximum probability for a real image.
+
+6. We then take that to a mathematical function that calculates the loss where we are going to compare fake inputs to the number ```0``` and real inputs to the number ```1```. 
+
+**Note:** The discriminator wants to be able to predict that the fake inputs are fake, therefore have a propabilty of ```0``` and that the real inputs are real with a probability of ```1```.
+
+8. Once we have calculated the loss we are going to use ```backpropagation``` to update the parameters, <img src="https://latex.codecogs.com/png.image?\dpi{110}\theta&space;_{d}" title="https://latex.codecogs.com/png.image?\dpi{110}\theta _{d}" /> of the discriminator only.
+
 #### 1.4 The Generator
 
 
