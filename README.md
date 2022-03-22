@@ -478,7 +478,7 @@ Similarly:
 When the label is 0, and the loss function reduces to the negative log of 1 minus that prediction. Hence, when the prediction is close to 0, the loss is also close to 0. That means we're doing great. But when our prediction is closer to 1, but the ground truth is 0, it will approach infinity again.
 
 <p align="center">
-  <img src= "https://user-images.githubusercontent.com/59663734/159493911-c128212a-c25a-4253-b0b7-54726a0d3f56.png" />
+  <img src= "https://user-images.githubusercontent.com/59663734/159517960-54a5c554-487c-419a-8738-5c228acd40a7.png" />
 </p>
 
 
