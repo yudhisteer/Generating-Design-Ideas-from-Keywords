@@ -416,7 +416,21 @@ where ```y``` is the target (target probability) label which is ```1``` for real
 
 We notice that our cost function has two parts: one more focused on their real images and one more focused on the fake.
 
+1. **```y``` = 1:**
 
+ When the label is equal to ```1``` we have only the first part of the equation which is 
+ 
+<p align="center">
+  <img src= "https://latex.codecogs.com/svg.image?y&space;*&space;log(\hat{y})" title="https://latex.codecogs.com/svg.image?y * log(\hat{y})" />
+</p>
+ 
+ that is 
+ 
+<p align="center">
+  <img src= "https://latex.codecogs.com/png.image?\dpi{110}target&space;*&space;log(prediction)" title="https://latex.codecogs.com/png.image?\dpi{110}target * log(prediction)" />
+</p>
+
+2. **```y``` = 0:**
 
 
 # Conclusion
