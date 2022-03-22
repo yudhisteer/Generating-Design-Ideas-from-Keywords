@@ -278,7 +278,7 @@ Now we are going to see the whole process of the training of the discriminator w
 
 
 <p align="center">
-  <img src= "https://user-images.githubusercontent.com/59663734/159412761-baaf867f-54ba-4e8a-9a49-6ba6ba126745.png" width="800" height="270"/>
+  <img src= "https://user-images.githubusercontent.com/59663734/159497436-230dd831-818a-4f76-bf4a-d57936f86678.png" width="800" height="270"/>
 </p>
 
 
@@ -309,7 +309,7 @@ The generators final goal is to be able to produce examples from a certain class
 
 4. The discriminator output <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}_{d}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}_{d}" /> which is in the range of ```0``` to ```1``` will be used to compute a ```cost function``` that basically looks at how far the examples produced by the generator are being considered real by the discriminator because the generator wants this to seem as real as possible. That is, how good is the performance of the generator?
 
-5. The generator wants <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}_{d}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}_{d}" /> to be as close to ```1```, meaning ```real``` as possible. Whereas, the discriminator is trying to get this to be ```0``` - ```fake```.
+5. The generator wants <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}_{d}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}_{d}" /> to be as close to ```1```, meaning ```real``` as possible. Whereas, the discriminator is trying to get this to be ```0``` - ```fake```.  Hence, the predictions are compared using the loss function with all the labels equal to real. Because the generator is trying to get these fake images to be equal to real or label of 1 as closely as possible.
 
 6. The cost function uses the difference between these two to then update the parameters of the generator using backpropagation. It gets to improve over time and know which direction to move it's parameters to generate something that looks more real and will fool the discriminator.
 
@@ -317,7 +317,7 @@ The generators final goal is to be able to produce examples from a certain class
 
 
 <p align="center">
-  <img src= "https://user-images.githubusercontent.com/59663734/159430976-0dbff385-2417-4ed7-a2df-bb1bd0e3cddf.png" width="800" height="250"/>
+  <img src= "https://user-images.githubusercontent.com/59663734/159497152-4792bbcb-ecd1-4640-a951-855e0dfc3231.png" width="800" height="250"/>
 </p>
 
 So once we get a generator that looks pretty good, we can save the parameters theta of the generator and then ```sample``` from this safe generator. What sampling basically means is that we have these random noise vectors and when we input that into the saved generator, it can generate all sorts of different examples. 
@@ -414,6 +414,8 @@ where ```y``` is the target (target probability) label which is ```1``` for real
   <img src= "https://user-images.githubusercontent.com/59663734/159466939-5e314a92-4f43-4dd8-942a-6540e763380d.png" />
 </p>
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 We notice that our cost function has two parts: one more focused on the real images and one more focused on the fake. We will now look at the function when y = 1 and when y = 0:
 
 **```y = 1:```**
@@ -447,6 +449,7 @@ In this plot, we have our prediction value on the x-axis and the loss associated
   <img src= "https://user-images.githubusercontent.com/59663734/159491019-7e513dbe-b5cf-48fd-93a1-a99f352ba741.png" />
 </p>
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 **```y = 0:```**
 
@@ -461,8 +464,6 @@ that is:
 <p align="center">
   <img src= "https://user-images.githubusercontent.com/59663734/159487659-4fa0120b-009e-4cb2-8e14-f162b9fffe0b.png" />
 </p>
-
-
 
 Similarly:
 
