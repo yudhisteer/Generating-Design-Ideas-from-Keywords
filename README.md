@@ -489,8 +489,7 @@ Basically, each of these terms - <img src="https://latex.codecogs.com/png.image?
 
 That brings us to this negative sign a little bit. If either of these values evaluates to something really big in the negative direction, then this negative sign is crucial to making sure that it becomes a positive number and positive infinity. Because for our cost function, what we typically want is a high-value being bad, and our neural network is trying to reduce this value as much as possible. Getting predictions that are closer, evaluating to ```0``` makes sense here, because we want to minimize our cost function as we learn.
 
-
-In summary, one term in the cost function is relevant when the label ```0```, the other one is relevant when it's ```1```, and in either case, the logarithm of a value between 1-0 was calculated, which returns that negative result. That's why we want this negative term at the beginning, to make sure that this is high, or greater than, or equal to 0.
+In summary, one term in the cost function is relevant when the label ```0```, the other one is relevant when it's ```1```, and in either case, the logarithm of a value between 1-0 was calculated, which returns that negative result. That's why we want this negative term at the beginning, to make sure that this is high, or greater than, or equal to 0. When prediction and the label are similar, the BCE loss is close to 0. When they're very different, that BCE loss approaches infinity. The BCE loss is performed across a mini-batch of several examples - n examples. It then takes the average of all those n examples.
 
 # Conclusion
 
