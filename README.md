@@ -579,6 +579,19 @@ We need to alternate their training, only one model is trained at a time, while 
 
 On the other hand, if we had a superior generator that completely outskills the discriminator, then we'll get predictions telling us that all the generated images are 100% real. The discriminator has a much easier task, it's just trying to figure out which ones are real, which ones are fake, as opposed to model the entire space of what a class could look like.  And so having output from the discriminator be much more informative, like 0.87 fake or 0.2 fake as opposed to just 100% fake or of probability one fake, is much more informative to the generator in terms of updating its weights and having it learn to generate realistic images over time.
 
+
+##### 1.4.8 Generating New Data
+
+
+
+
+
+
+
+
+
+
+
 # Conclusion
 
 # References
@@ -587,8 +600,9 @@ On the other hand, if we had a superior generator that completely outskills the 
 3. https://www.whichfaceisreal.com/
 4. https://this-person-does-not-exist.com/en
 5. https://www.youtube.com/watch?v=HHNESCbZqUg
-6. https://www.analyticsvidhya.com/blog/2021/07/deep-understanding-of-discriminative-and-generative-models-in-machine-learning/
-7. http://ai.stanford.edu/~ang/papers/nips01-discriminativegenerative.pdf
-8. https://medium.com/@mlengineer/generative-and-discriminative-models-af5637a66a3
-9. https://www.youtube.com/watch?v=z5UQyCESW64
-10. https://machinelearningmastery.com/cross-entropy-for-machine-learning/
+6. https://machinelearningmastery.com/generative-adversarial-network-loss-functions/
+7. https://www.analyticsvidhya.com/blog/2021/07/deep-understanding-of-discriminative-and-generative-models-in-machine-learning/
+8. http://ai.stanford.edu/~ang/papers/nips01-discriminativegenerative.pdf
+9. https://medium.com/@mlengineer/generative-and-discriminative-models-af5637a66a3
+10. https://www.youtube.com/watch?v=z5UQyCESW64
+11. https://machinelearningmastery.com/cross-entropy-for-machine-learning/
