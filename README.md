@@ -581,11 +581,17 @@ On the other hand, if we had a superior generator that completely outskills the 
 
 
 ##### 1.4.8 Generating New Data
+After training  we can actually use the generator network which is now fully trained to produce new data instances that have never been seen before.
 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159675456-740a97c3-1b36-42de-8ef7-22d4ff98628a.png" width="500" height="350" />
+</p>
 
+When the trained generator of a GAN synthesizes new instances, it's effectively learning a transformation from a distribution of noise to a target data distribution and that transformation - that mapping is going to be what's learned over the course of training. If we consider one point from a latent noise distribution it's going to result in a particular output in the target data space and if we consider another point of random noise and feed it through the generator, it is going to result in a new instance. That new instance is going to fall somewhere else on the data manifold.
 
-
-
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159677674-150fef07-783e-445c-ba96-b97853eac72a.gif" />
+</p>
 
 
 
