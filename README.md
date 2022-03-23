@@ -481,14 +481,75 @@ When the label is 0, and the loss function reduces to the negative log of 1 minu
   <img src= "https://user-images.githubusercontent.com/59663734/159517960-54a5c554-487c-419a-8738-5c228acd40a7.png" />
 </p>
 
-
-
-
 Basically, each of these terms - <img src="https://latex.codecogs.com/png.image?\dpi{110}(1-y)*log(1-\hat{y})" title="https://latex.codecogs.com/png.image?\dpi{110}(1-y)*log(1-\hat{y})" /> and <img src="https://latex.codecogs.com/png.image?\dpi{110}(1-y)*log(1-\hat{y})" title="https://latex.codecogs.com/png.image?\dpi{110}(1-y)*log(1-\hat{y})" /> evaluates to negative infinity if for their relevant label, the prediction is really bad. 
 
 **Why do we have a negative sign in front of our cost function?**
 
-That brings us to this negative sign a little bit. If either of these values evaluates to something really big in the negative direction, then this negative sign is crucial to making sure that it becomes a positive number and positive infinity. Because for our cost function, what we typically want is a high-value being bad, and our neural network is trying to reduce this value as much as possible. Getting predictions that are closer, evaluating to ```0``` makes sense here, because we want to minimize our cost function as we learn.
+If either of these values evaluates to something really big in the negative direction, then this negative sign is crucial to making sure that it becomes a positive number and positive infinity. Because for our cost function, what we typically want is a high-value being bad, and our neural network is trying to reduce this value as much as possible. Getting predictions that are closer, evaluating to ```0``` makes sense here, because we want to minimize our cost function as we learn.
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+Our cost function needs to define a ```global optimum``` such that the generator could perfectly reproduce the true data distribution such that the discriminator  cannot absolutely  tell what's synthetic versus what's real.
+
+##### 1.4.5 Discriminator Loss
+If we consider the loss  from the perspective of the discriminator we want to try to ```maximize``` the probability that the fake data is identified as fake and real data is identified as real.
+
+_We train D to maximize the probability of assigning the correct label to both training examples and samples from G._
+
+Therefore, the discriminator wants to maximize the average of the log probability for real images and the log of the inverted probabilities of fake images:
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159638390-352aa2d8-1c31-48c6-adb7-1b9c82e1719b.png" />
+</p>
+
+- ```log(D(X))``` is the discriminator's output for real data X. This is going to be likelihood of real data being real from the data distribution. So we want it to output ```1```.
+
+- ```G(z)```  defines the generator's output and so ```D(G(z))``` is the discriminator's estimate of the probability that a fake instance is actually fake. So we want it to output ```0``` and then ```1 - D(G(z))``` becomes ```1``` so we are left with ```log(1)``` which also equals to ```0```.
+
+Therefore, the dircriminator wants to ```maximize``` objective such that ```D(x)``` is close to ```1``` (**real**)  and ```D(G(z))``` is close to ```0``` (**fake**).
+
+##### 1.4.6 Generator Loss
+The generator seeks to minimize the log of the inverse probability predicted by the discriminator for fake images. This has the effect of encouraging the generator to generate samples that have a low probability of being fake.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159644272-7835afdd-4a84-4f31-9465-9382c96fdea0.png" />
+</p>
+
+
+- ```G(z)```  defines the generator's output and so ```D(G(z))``` is the discriminator's estimate of the probability that a fake instance is actually fake. So the generator wants it to output ```1```(wants to fool discriminator that data is real). ```1 - D(G(z))``` becomes ```0``` so we are left with ```log(0)``` which is undefined (-inf).
+
+Therefore, the generator wants to ```minimize``` objective such that ```D(G(z))``` is close to ```1```(Discriminator is fooled into thinking generated G(z) is real).
+
+
+For the GAN, the generator and discriminator are the two players and take turns involving updates to their model weights. The min and max refer to the minimization of the generator loss and the maximization of the discriminator’s loss.
+
+
+Now, we have these two players and so we're going to train this jointly in a ```minimax``` game formulation. It's going to be minimum over <img src="https://latex.codecogs.com/png.image?\dpi{110}\theta&space;_{g}" title="https://latex.codecogs.com/png.image?\dpi{110}\theta _{g}" />, our parameters of our generator network G, and maximum over parameter <img src="https://latex.codecogs.com/png.image?\dpi{110}\theta&space;_{d}" title="https://latex.codecogs.com/png.image?\dpi{110}\theta _{d}" /> of our Discriminator network D.
+
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159647158-fd5fa24b-a339-4399-bd9c-87e4b629b9b6.png" />
+</p>
+
+
+In order to train this, we're going to alternate between gradient ascent on our discriminator to maximize this objective and then gradient descent on the generator to minimize the objective.
+
+1. **Gradient Ascent** on Discriminator:
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159638390-352aa2d8-1c31-48c6-adb7-1b9c82e1719b.png" />
+</p>
+
+
+2. **Gradient Descent** on Generator:
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159644272-7835afdd-4a84-4f31-9465-9382c96fdea0.png" />
+</p>
+
+
+
+
 
 In summary, one term in the cost function is relevant when the label ```0```, the other one is relevant when it's ```1```, and in either case, the logarithm of a value between 1-0 was calculated, which returns that negative result. That's why we want this negative term at the beginning, to make sure that this is high, or greater than, or equal to 0. When prediction and the label are similar, the BCE loss is close to 0. When they're very different, that BCE loss approaches infinity. The BCE loss is performed across a mini-batch of several examples - n examples. It then takes the average of all those n examples.
 
