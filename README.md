@@ -573,6 +573,12 @@ If we plot this function on the right here, then we have a high gradient signal 
 </p>
 
 
+We need to alternate their training, only one model is trained at a time, while the other one is held constant. 
+
+**Note:** It's important to keep in mind that both models should improve ```together``` and should be kept at ```similar``` skill levels from the beginning of training. And so the reasoning behind this is if we had a discriminator that is superior than the generator, we'll get predictions from it telling us that all the fake examples are 100% fake. the generator doesn't know how to improve. Everything just looks super fake, there isn't anything telling it to know which direction to go in.
+
+On the other hand, if we had a superior generator that completely outskills the discriminator, then we'll get predictions telling us that all the generated images are 100% real. The discriminator has a much easier task, it's just trying to figure out which ones are real, which ones are fake, as opposed to model the entire space of what a class could look like.  And so having output from the discriminator be much more informative, like 0.87 fake or 0.2 fake as opposed to just 100% fake or of probability one fake, is much more informative to the generator in terms of updating its weights and having it learn to generate realistic images over time.
+
 # Conclusion
 
 # References
