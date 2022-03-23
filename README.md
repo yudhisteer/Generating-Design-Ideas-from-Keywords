@@ -547,6 +547,9 @@ In order to train this, we're going to alternate between gradient ascent on our 
   <img src= "https://user-images.githubusercontent.com/59663734/159644272-7835afdd-4a84-4f31-9465-9382c96fdea0.png" />
 </p>
 
+##### 1.4.7 Non-Saturating GAN Loss
+In practice, this loss function for the generator saturates. This means that if it cannot learn as quickly as the discriminator, the discriminator wins, the game ends, and the model cannot be trained effectively. Let's see how:
+
 
 
 
