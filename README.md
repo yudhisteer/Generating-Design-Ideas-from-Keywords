@@ -11,6 +11,7 @@
     - The Discriminator
     - The Generator
     - Cross Entropy Cost Function
+    - Coding a Basic GAN
 
 2. Wasserstein GANs with Gradient Penalty
 
@@ -593,7 +594,7 @@ When the trained generator of a GAN synthesizes new instances, it's effectively 
   <img src= "https://user-images.githubusercontent.com/59663734/159677674-150fef07-783e-445c-ba96-b97853eac72a.gif" />
 </p>
 
-
+#### 1.5 Coding a Basic GAN
 
 
 
