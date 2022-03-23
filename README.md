@@ -489,6 +489,8 @@ If either of these values evaluates to something really big in the negative dire
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
+In summary, one term in the cost function is relevant when the label ```0```, the other one is relevant when it's ```1```, and in either case, the logarithm of a value between 1-0 was calculated, which returns that negative result. That's why we want this negative term at the beginning, to make sure that this is high, or greater than, or equal to 0. When prediction and the label are similar, the BCE loss is close to 0. When they're very different, that BCE loss approaches infinity. The BCE loss is performed across a mini-batch of several examples - n examples. It then takes the average of all those n examples.
+
 Our cost function needs to define a ```global optimum``` such that the generator could perfectly reproduce the true data distribution such that the discriminator  cannot absolutely  tell what's synthetic versus what's real.
 
 ##### 1.4.5 Discriminator Loss
@@ -550,11 +552,26 @@ In order to train this, we're going to alternate between gradient ascent on our 
 ##### 1.4.7 Non-Saturating GAN Loss
 In practice, this loss function for the generator saturates. This means that if it cannot learn as quickly as the discriminator, the discriminator wins, the game ends, and the model cannot be trained effectively. Let's see how:
 
+- When plotting the graph ```log(1-D(G(z)))```, we see that the slope of this loss is actually going to be higher towards the right. That is, the slope is high when ```D(G(z))``` - our generator - is doing a good job of fooling the discriminator. 
+ 
+ - And on the other hand when we have bad samples, i.e, when our generator has not learned a good job yet, therefore when the discriminator can easily tell it is fake data, the gradient is closer to this zero region on the X axis. This actually means that our gradient signal is dominated by region where the sample is already pretty good. Whereas we actually want it to learn a lot when the samples are bad. And thus, this makes it hard to learn.
 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159667940-65392410-b1ae-44f3-b0bf-6ecf08061a53.png" />
+</p>
 
+In order to improve learning, we're going to define a different objective function for the gradient where we are now going to do **gradient ascent** on the generator instead. In the previous case, the generator sought to minimize the probability of images being predicted as fake. Here, the generator seeks to maximize the probability of images being predicted as real. So instead of seeing the glass half empty, we want to see it half full.
 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159670578-77a32bed-cb94-4024-a43c-13ad3cee2cba.png" />
+</p>
 
-In summary, one term in the cost function is relevant when the label ```0```, the other one is relevant when it's ```1```, and in either case, the logarithm of a value between 1-0 was calculated, which returns that negative result. That's why we want this negative term at the beginning, to make sure that this is high, or greater than, or equal to 0. When prediction and the label are similar, the BCE loss is close to 0. When they're very different, that BCE loss approaches infinity. The BCE loss is performed across a mini-batch of several examples - n examples. It then takes the average of all those n examples.
+If we plot this function on the right here, then we have a high gradient signal in this region on the left where we had bad samples, and now the flatter region is to the right where we would have good samples. So now we're going to learn more from regions of bad samples and so this has the same objective of fooling the discriminator but it actually works much better in practice.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159671193-c0dcca4d-9b18-44ba-b0cc-a9c10670f29f.png" />
+</p>
+
 
 # Conclusion
 
