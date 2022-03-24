@@ -613,3 +613,6 @@ When the trained generator of a GAN synthesizes new instances, it's effectively 
 9. https://medium.com/@mlengineer/generative-and-discriminative-models-af5637a66a3
 10. https://www.youtube.com/watch?v=z5UQyCESW64
 11. https://machinelearningmastery.com/cross-entropy-for-machine-learning/
+12. https://towardsdatascience.com/keywords-to-know-before-you-start-reading-papers-on-gans-8a08a665b40c#:~:text=Latent%20space%20is%20simply%20any,dataset%20it%20was%20trained%20on).
+13. https://towardsdatascience.com/understanding-latent-space-in-machine-learning-de5a7c687d8d
+14. https://medium.com/swlh/how-i-would-explain-gans-from-scratch-to-a-5-year-old-part-1-ce6a6bccebbb
