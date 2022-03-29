@@ -596,8 +596,10 @@ When the trained generator of a GAN synthesizes new instances, it's effectively 
 
 #### 1.5 Coding a Basic GAN
 
+### 2. Wasserstein GANs with Gradient Penalty
+A major issue with GAN is when a GAN generates the same thing each time. For example, a GAN trained on all different cat breeds will only generate a Sphinx cat. This issue happens because the discriminator improves but it gets stuck between saying an image of a cat looks extremely fake or extremely real. It's a classifier after all, so it's encouraged to say it's ```1``` - real or ```0``` - fake as it gets better. But in a single round of training, if the discriminator only thinks the generator's data looks real, even if it doesn't even look that real, then the generator will cling on to that image and only produce that type of data. Now when the discriminator learns that the data is fake in the next round of training, the generator won't know where to go because there's really nothing else it has in its arsenal of different images and that's the end of learning. Digging one level deeper, this happens because of **binary cross-entropy loss**, where the discriminator is forced to produce a value between zero or one, and even though there's an infinite number of decimal values between zero and one, it'll approach zero and one as it gets better.
 
-
+##### 2.1 Issue with BCE Loss
 
 # Conclusion
 
