@@ -15,7 +15,12 @@
 
 2. Wasserstein GANs with Gradient Penalty
 
-    - ddd
+    - Mode Collapse
+    - Limitation of BCE Loss
+    - Earth Mover Distance
+    - Wasserstein Loss
+    - 
+    - 
 3. Conditional GAN and Controllable Generation
 
 
@@ -597,9 +602,43 @@ When the trained generator of a GAN synthesizes new instances, it's effectively 
 #### 1.5 Coding a Basic GAN
 
 ### 2. Wasserstein GANs with Gradient Penalty
-A major issue with GAN is when a GAN generates the same thing each time. For example, a GAN trained on all different cat breeds will only generate a Sphinx cat. This issue happens because the discriminator improves but it gets stuck between saying an image of a cat looks extremely fake or extremely real. It's a classifier after all, so it's encouraged to say it's ```1``` - real or ```0``` - fake as it gets better. But in a single round of training, if the discriminator only thinks the generator's data looks real, even if it doesn't even look that real, then the generator will cling on to that image and only produce that type of data. Now when the discriminator learns that the data is fake in the next round of training, the generator won't know where to go because there's really nothing else it has in its arsenal of different images and that's the end of learning. Digging one level deeper, this happens because of **binary cross-entropy loss**, where the discriminator is forced to produce a value between zero or one, and even though there's an infinite number of decimal values between zero and one, it'll approach zero and one as it gets better.
+A major issue with GAN is when a GAN generates the same thing each time. For example, a GAN trained on all different cat breeds will only generate a Sphinx cat. This issue happens because the discriminator improves but it gets stuck between saying an image of a cat looks ```extremely fake``` or ```extremely real```. 
 
-##### 2.1 Issue with BCE Loss
+The discriminator being a ```classifier``` is encouraged to say it's ```1``` - **real** or ```0``` - **fake** as it gets better. But in a single round of training, if the discriminator only thinks the generator's data looks real, even if it doesn't even look that real, then the generator will **cling** on to that image and **only** produce that type of data. 
+
+Now when the discriminator learns that the data is fake in the next round of training, the generator won't know where to go because there's really nothing else it has in its arsenal of different images and that's the end of learning. Digging one level deeper, this happens because of **binary cross-entropy loss**, where the discriminator is forced to produce a value between zero or one, and even though there's an infinite number of decimal values between zero and one, it'll approach zero and one as it gets better.
+
+#### 2.1 Mode Collapse
+What is mode? The mode is the value that appears most often in a set of data values. If X is a discrete random variable, the mode is the value x at which the probability mass function takes its ```maximum``` value. In other words, it is the value that is ```most likely``` to be sampled.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/161033722-07ced60d-9d35-49db-9f4b-a61386637cd0.png" />
+</p>
+
+As shown above, the mean value in a normal distribution is the single mode of that distribution. There are instances whereby for a probability density distribution we have two modes (```Bimodal```) and mean does not necessarily have to be one of them. So more intuitively, any peak on the probability density distribution over features is a mode of that distribution.
+
+Figure below shows handwritten digits represented by features <img src="https://latex.codecogs.com/png.image?\dpi{110}x_{1}" title="https://latex.codecogs.com/png.image?\dpi{110}x_{1}" /> and <img src="https://latex.codecogs.com/png.image?\dpi{110}x_{2}" title="https://latex.codecogs.com/png.image?\dpi{110}x_{2}" />. The probability density distribution in this case will be a surface with many peaks corresponding to each digit. This is ```multimodal``` with 10 different modes for each number from ```0``` to ```9```.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/161037371-4c829b6b-8199-4a49-919c-39c62da3eefa.png"  width="500" height="300"/>
+</p>
+
+We can imagine each of these peaks coming out at us in a 3D representation where the darker circle represents higher altitudes. So average looking ```7``` represented in red wiill be at the mode of the distribution.
+
+To understand mode collapse let's take for example a discriminator who can perfectly classify each handwritten digits except ones and sevens.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/161051519-a66a3e8e-8015-49c7-99f5-01f346ec8d4f.png"/>
+</p>
+
+Eventually the discriminator will probably catch on and learn to catch the generator's fake handwritten number ones by getting out of that ```local minima```. But the generator could also migrate to another mode of the distribution and again would collapse again to a different mode. Or the generator would not be able to figure out where else to diversify. 
+
+
+ To sum up:
+ 
+- Modes are peaks of the probability distribution of our features. 
+- Real-world datasets have many modes related to each possible class within them. 
+- Mode collapse happens when the generator learns to fool the discriminator by producing examples from a ```single class``` from the whole training dataset like handwritten number ones. This is unfortunate because, while the generator is optimizing to fool the discriminator, that's not what we ultimately want our generator to do.
 
 # Conclusion
 
