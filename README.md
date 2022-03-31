@@ -650,13 +650,13 @@ Recall the BCE loss function is just an average of the cost for the discriminato
 
 The first term <p align="center">
   <img src= "https://latex.codecogs.com/svg.image?y&space;*&space;log(\hat{y})" title="https://latex.codecogs.com/svg.image?y * log(\hat{y})" />
-</p>  is for **reals** and the second term   <p align="center">
+</p>  is for reals and the second term   <p align="center">
   <img src= "https://user-images.githubusercontent.com/59663734/159487419-8aaed528-e48d-4131-b483-8799d1d64f63.png" />
-</p> is for the **fakes**. The higher this cost value is, the worse the discriminator is doing at it.  
+</p> is for the fakes. The higher this cost value is, the worse the discriminator is doing at it.  
 
 . 
 
-The generator wants to ```maximize``` this cost because that means the discriminator is doing poorly and is classifying it's fake values into reals. Whereas the discriminator wants to ```minimize``` this cost function because that means it's classifying things correctly. Note that the generator only sees the fake side of things, so it actually doesn't see anything about the reals. This maximization and minimization is often called a ```minimax game```.
+The generator wants to ```maximize``` this cost because that means the discriminator is doing poorly and is classifying it's fake values into reals. Whereas the discriminator wants to ```minimize``` this cost function because that means it's classifying things correctly. Note that the generator only sees the fake side of things, so it actually doesn't see anything about the reals. This maximization and minimization is often called a ```minmax game```.
 
 
 
