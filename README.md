@@ -640,6 +640,27 @@ Eventually the discriminator will probably catch on and learn to catch the gener
 - Real-world datasets have many modes related to each possible class within them. 
 - Mode collapse happens when the generator learns to fool the discriminator by producing examples from a ```single class``` from the whole training dataset like handwritten number ones. This is unfortunate because, while the generator is optimizing to fool the discriminator, that's not what we ultimately want our generator to do.
 
+
+#### 2.2 Limitation of BCE Loss
+Recall the BCE loss function is just an average of the cost for the discriminator for misclassifying real and fake observations. 
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159465858-1c6506c8-a17a-4c69-a541-fa7c31f4d24a.png" />
+</p>
+
+The first term <p align="center">
+  <img src= "https://latex.codecogs.com/svg.image?y&space;*&space;log(\hat{y})" title="https://latex.codecogs.com/svg.image?y * log(\hat{y})" />
+</p>  is for **reals** and the second term   <p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/159487419-8aaed528-e48d-4131-b483-8799d1d64f63.png" />
+</p> is for the **fakes**. The higher this cost value is, the worse the discriminator is doing at it.  
+
+. 
+
+The generator wants to ```maximize``` this cost because that means the discriminator is doing poorly and is classifying it's fake values into reals. Whereas the discriminator wants to ```minimize``` this cost function because that means it's classifying things correctly. Note that the generator only sees the fake side of things, so it actually doesn't see anything about the reals. This maximization and minimization is often called a ```minimax game```.
+
+
+
+
 # Conclusion
 
 # References
