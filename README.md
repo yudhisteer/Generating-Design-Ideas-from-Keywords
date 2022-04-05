@@ -313,6 +313,10 @@ The generators final goal is to be able to produce examples from a certain class
 
 3. This image, <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{X}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{X}" /> is fed into the discriminator, which determines how real and how fake it thinks it is based on its inspection of it.
 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/161687658-bc5da96a-5d0c-4fac-9db0-52be7906c132.gif" />
+</p>
+
 4. The discriminator output <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}_{d}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}_{d}" /> which is in the range of ```0``` to ```1``` will be used to compute a ```cost function``` that basically looks at how far the examples produced by the generator are being considered real by the discriminator because the generator wants this to seem as real as possible. That is, how good is the performance of the generator?
 
 5. The generator wants <img src="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}_{d}" title="https://latex.codecogs.com/png.image?\dpi{110}\hat{Y}_{d}" /> to be as close to ```1```, meaning ```real``` as possible. Whereas, the discriminator is trying to get this to be ```0``` - ```fake```.  Hence, the predictions are compared using the loss function with all the labels equal to real. Because the generator is trying to get these fake images to be equal to real or label of 1 as closely as possible.
