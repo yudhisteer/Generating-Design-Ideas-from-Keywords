@@ -753,6 +753,7 @@ In these functions:
 
 The discriminator model is a neural network that learns a binary classification problem, using a ```sigmoid activation function``` in the output layer, and is fit using a ```binary cross entropy``` loss function. As such, the model predicts a probability that a given input is real (or fake as 1 minus the predicted) as a value between 0 and 1. ```W-Loss```, however, doesn't have that requirement at all, so we can actually have a ```linear layer``` at the end of the discriminator's neural network and that could produce any real value output. And we can interpret that output as how real an image is considered by the critic.
 
+Note: Some of the explanations above are based from the blog of _machinelearningmastery_.
 
 In summary:
 
