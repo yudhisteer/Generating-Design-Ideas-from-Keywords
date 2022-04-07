@@ -744,6 +744,12 @@ Nore that the sign of the loss does not matter in this case, as long as ```loss 
   <img src= "https://latex.codecogs.com/png.image?\dpi{110}\underset{G}{min}\cdot&space;\underset{C}{max}[\mathbb{E}\cdot&space;C(x)&space;-&space;\mathbb{E}\cdot&space;C(G(z))]" title="https://latex.codecogs.com/png.image?\dpi{110}\underset{G}{min}\cdot \underset{C}{max}[\mathbb{E}\cdot C(x) - \mathbb{E}\cdot C(G(z))]"/>
 </p>
 
+In these functions:
+
+- C(x) is the critic's output for a real instance.
+- G(z) is the generator's output when given noise z.
+- C(G(z)) is the critic's output for a fake instance.
+
 
 The discriminator model is a neural network that learns a binary classification problem, using a ```sigmoid activation function``` in the output layer, and is fit using a ```binary cross entropy``` loss function. As such, the model predicts a probability that a given input is real (or fake as 1 minus the predicted) as a value between 0 and 1. ```W-Loss```, however, doesn't have that requirement at all, so we can actually have a ```linear layer``` at the end of the discriminator's neural network and that could produce any real value output. And we can interpret that output as how real an image is considered by the critic.
 
@@ -756,7 +762,7 @@ In summary:
 - The ```generator``` tries to ```minimize``` the W-Loss - trying to get the generative examples to be as close as possible to the real examples while the ```critic``` wants to ```maximize``` this expression because it wants to differentiate between the reals and the fakes, it wants the distance to be as large as possible. 
 
 
-
+#### 2.5 1-Lipschitz Continuous
 
 
 
@@ -783,3 +789,4 @@ In summary:
 13. https://towardsdatascience.com/understanding-latent-space-in-machine-learning-de5a7c687d8d
 14. https://medium.com/swlh/how-i-would-explain-gans-from-scratch-to-a-5-year-old-part-1-ce6a6bccebbb
 15. https://machinelearningmastery.com/how-to-implement-wasserstein-loss-for-generative-adversarial-networks/
+16. https://developers.google.com/machine-learning/gan/loss
