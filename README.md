@@ -689,8 +689,8 @@ To sum up:
 - When the discriminator improves too much, the function approximated by BCE loss will contain flat regions.
 - These flat regions cause vanishing gradient whereby the generator stops improving.
 
-
-
+#### 2.3 Earth Mover's Distance
+When using BCE loss to train a GAN, we often encounter ```mode collapse``` and ```vanishing gradient``` problems due to the underlying cost function of the whole architecture. Even though there is an infinite number of decimal values between ```0``` and ```1```, the discriminator, as it improves, will be pushing towards those ends.
 
 
 # Conclusion
