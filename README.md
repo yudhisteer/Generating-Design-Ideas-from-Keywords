@@ -762,7 +762,8 @@ In summary:
 - The ```generator``` tries to ```minimize``` the W-Loss - trying to get the generative examples to be as close as possible to the real examples while the ```critic``` wants to ```maximize``` this expression because it wants to differentiate between the reals and the fakes, it wants the distance to be as large as possible. 
 
 
-#### 2.5 1-Lipschitz Continuous
+#### 2.5 Condition on Wasserstein Critic
+
 
 
 
