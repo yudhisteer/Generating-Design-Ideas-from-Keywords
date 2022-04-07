@@ -710,7 +710,14 @@ In summary:
 #### 2.4 Wasserstein Loss
 An alternative loss function called ```Wasserstein Loss``` - ```W-Loss``` approximates the Earth Mover's Distance.
 
+The discriminator is no longer bounded between ```0``` and ```1```, i.e, it is no longer discriminating between these two classes. And so, our neural network cannot be called a discriminator because it doesn't discriminate between the classes. And so, for W-Loss, the equivalent to a discriminator is called a ```critic```, and what the Wasserstein loss function seeks to do is ```increase``` the gap between the scores for real and generated images.
 
+We can summarize the function as it is described in the Wasserstein GAN paper as follows:
+
+- Critic Loss = [average critic score on real images] – [average critic score on fake images]
+- Generator Loss = -[average critic score on fake images]
+
+Where the average scores are calculated across a mini-batch of samples.
 
 
 # Conclusion
@@ -730,3 +737,4 @@ An alternative loss function called ```Wasserstein Loss``` - ```W-Loss``` approx
 12. https://towardsdatascience.com/keywords-to-know-before-you-start-reading-papers-on-gans-8a08a665b40c#:~:text=Latent%20space%20is%20simply%20any,dataset%20it%20was%20trained%20on).
 13. https://towardsdatascience.com/understanding-latent-space-in-machine-learning-de5a7c687d8d
 14. https://medium.com/swlh/how-i-would-explain-gans-from-scratch-to-a-5-year-old-part-1-ce6a6bccebbb
+15. https://machinelearningmastery.com/how-to-implement-wasserstein-loss-for-generative-adversarial-networks/
