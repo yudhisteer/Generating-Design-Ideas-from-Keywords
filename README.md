@@ -708,7 +708,7 @@ In summary:
 
 
 #### 2.4 Wasserstein Loss
-An alternative loss function called ```Wasserstein Loss``` - ```W-Loss``` approximates the Earth Mover's Distance.
+An alternative loss function called ```Wasserstein Loss``` - ```W-Loss``` approximates the Earth Mover's Distance. Instead of using a discriminator to classify or predict the probability of generated images as being real or fake, the WGAN changes or replaces the discriminator model with a ```critic``` that **scores** the ```realness``` or ```fakeness``` of a given image. Specifically, the lower the loss of the critic when evaluating generated images, the higher the expected quality of the generated images. 
 
 The discriminator is no longer bounded between ```0``` and ```1```, i.e, it is no longer discriminating between these two classes. And so, our neural network cannot be called a discriminator because it doesn't discriminate between the classes. And so, for W-Loss, the equivalent to a discriminator is called a ```critic```, and what the Wasserstein loss function seeks to do is ```increase``` the gap between the scores for real and generated images.
 
@@ -718,6 +718,51 @@ We can summarize the function as it is described in the Wasserstein GAN paper as
 - Generator Loss = -[average critic score on fake images]
 
 Where the average scores are calculated across a mini-batch of samples.
+
+So the discriminator wants to ```maximize``` the distance between its thoughts on the reals versus its thoughts on the fakes. So it's trying to push away these two distributions to be as far apart as possible. 
+
+<p align="center">
+  <img src= "https://latex.codecogs.com/png.image?\dpi{110}\underset{C}{max}(\mathbb{E}\cdot&space;C(x))&space;-&space;(\mathbb{E}\cdot&space;C(G(z)))" title="https://latex.codecogs.com/png.image?\dpi{110}\underset{C}{max}(\mathbb{E}\cdot C(x)) - (\mathbb{E}\cdot C(G(z)))"/>
+</p>
+
+In the case of the critic, a larger score for real images results in a larger resulting loss for the critic, penalizing the model. This encourages the critic to output **smaller scores for real images**. For example, an average score of 20 for real images and 50 for fake images results in a loss of -30; an average score of 10 for real images and 50 for fake images results in a loss of -40, which is better, and so on.
+
+Meanwhile, the generator wants to ```minimize``` this difference because it wants the discriminator to think that its fake images are as close as possible to the reals.
+
+<p align="center">
+  <img src= "https://latex.codecogs.com/png.image?\dpi{110}\underset{G}{min}-(\mathbb{E}\cdot&space;C(G(z))" title="https://latex.codecogs.com/png.image?\dpi{110}\underset{G}{min}(\mathbb{E}\cdot C(G(z))"/>
+</p>
+
+
+In the case of the generator, a ```larger score``` from the **critic** will result in a ```smaller loss``` for the **generator**, encouraging the critic to output larger scores for fake images. For example, an average score of 10 becomes -10, an average score of 50 becomes -50, which is smaller, and so on.
+
+
+Nore that the sign of the loss does not matter in this case, as long as ```loss for real images``` is a **small** number and the ```loss for fake images``` is a **large** number. The Wasserstein loss encourages the critic to separate these numbers.
+
+
+<p align="center">
+  <img src= "https://latex.codecogs.com/png.image?\dpi{110}\underset{G}{min}\cdot&space;\underset{C}{max}[\mathbb{E}\cdot&space;C(x)&space;-&space;\mathbb{E}\cdot&space;C(G(z))]" title="https://latex.codecogs.com/png.image?\dpi{110}\underset{G}{min}\cdot \underset{C}{max}[\mathbb{E}\cdot C(x) - \mathbb{E}\cdot C(G(z))]"/>
+</p>
+
+
+The discriminator model is a neural network that learns a binary classification problem, using a ```sigmoid activation function``` in the output layer, and is fit using a ```binary cross entropy``` loss function. As such, the model predicts a probability that a given input is real (or fake as 1 minus the predicted) as a value between 0 and 1. ```W-Loss```, however, doesn't have that requirement at all, so we can actually have a ```linear layer``` at the end of the discriminator's neural network and that could produce any real value output. And we can interpret that output as how real an image is considered by the critic.
+
+
+In summary:
+
+- the discriminator under **BCE** Loss outputs a value between ```0``` and ```1```, while the critic in **W-Loss** will output ```any number```.
+- because it's not bounded, the critic is allowed to improve without degrading its feedback back to the generator. 
+- It doesn't have a vanishing gradient problem, and this will mitigate against mode collapse, because the generator will always get useful feedback.
+- The ```generator``` tries to ```minimize``` the W-Loss - trying to get the generative examples to be as close as possible to the real examples while the ```critic``` wants to ```maximize``` this expression because it wants to differentiate between the reals and the fakes, it wants the distance to be as large as possible. 
+
+
+
+
+
+
+
+
+
 
 
 # Conclusion
