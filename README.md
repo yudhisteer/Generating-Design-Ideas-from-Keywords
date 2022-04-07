@@ -662,6 +662,34 @@ The first term <p align="center">
 
 The generator wants to ```maximize``` this cost because that means the discriminator is doing poorly and is classifying it's fake values into reals. Whereas the discriminator wants to ```minimize``` this cost function because that means it's classifying things correctly. Note that the generator only sees the fake side of things, so it actually doesn't see anything about the reals. This maximization and minimization is often called a ```minmax game```.
 
+The discriminator needs to output just a **single value** prediction within ```0``` and ```1```. Whereas the generator actually needs to produce a pretty **complex** output composed of multiple features to try to fool the discriminator. As a result that discriminators job tends to be a little bit easier. To put it in another way: _critisizing is more straightforward_. As such, during training it's possible for the discriminator to outperform the generator.
+
+##### 2.2.1 Beginning of training
+We have two distributions: the ```real distribution``` and the ```generator distribution```. The objective of the GAN is to bring them together, i.e, to make the generator distribution be as close as possible to the real distribution so that the fake images are as similar as possible to the real images. 
+
+At the beginning of training the discriminator has trouble distinguishing the generated and real distributions. There is some overlap and it is not quite sure. As a result, it's able to give useful feedback in the form of a ```non-zero gradient``` back to the generator.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/162175861-6d0b3751-a9a2-403f-94ca-33ef10de8ddf.png" width="680" height="210"/>
+</p>
+
+
+##### 2.2.2 With more training
+As it gets better at training, it starts to delineate the generated and real distributions a little bit more such that it can start distinguishing them much more. The real distribution will be centered around ```1``` and the generated distribution will start to approach ```0```. As a result, when the discriminator is getting better, it will start giving less informative feedback. In fact, it might give **gradients closer to zero**, and that becomes unhelpful for the generator because then the generator doesn't know how to improve. This is how the ```vanishing gradient``` problem will arise. 
+
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/162177007-8c208317-6d3a-4702-91ee-e0c41619982e.png" width="680" height="230"/>
+</p>
+
+
+To sum up:
+
+- GANs try to make real and generated distribution look similar.
+- When the discriminator improves too much, the function approximated by BCE loss will contain flat regions.
+- These flat regions cause vanishing gradient whereby the generator stops improving.
+
+
 
 
 
