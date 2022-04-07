@@ -692,6 +692,26 @@ To sum up:
 #### 2.3 Earth Mover's Distance
 When using BCE loss to train a GAN, we often encounter ```mode collapse``` and ```vanishing gradient``` problems due to the underlying cost function of the whole architecture. Even though there is an infinite number of decimal values between ```0``` and ```1```, the discriminator, as it improves, will be pushing towards those ends.
 
+The Earth Mover's distance measures how different these two distributions are by estimating the amount of ```effort``` it takes to make the generated distribution equal to the real. Recall that the objective of the GAN is to make the generator distribution as equal as possible to the real distribution. The function depends on both the ```distance``` and the ```amount that the generated distribution needs to be moved```. In terms of an analogy, the generated distribution can be considered a pile of dirt and the Earth mover's distance means how difficult would it be to move that pile of dirt and mold it into the shape and location of the real distribution.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/162197487-bf6f436e-c0ab-456c-887e-682a65032569.png" width="680" height="250"/>
+</p>
+
+
+The problem with BCE loss is that as a discriminator improves, it would start giving more **extreme values** between ```0``` and ```1```. As a result, this become less helpful feedback for the generator and the generator would stop learning due to vanishing gradient problems. With Earth mover's distance, however, there's no such ceiling to the ```0``` and ```1```. The cost function continues to **grow** regardless of how far apart these distributions are. The gradient of this measure won't approach ```0``` and as a result, GANs are less prone to vanishing gradient problems and from vanishing gradient problems, mode collapse.
+
+In summary:
+
+- Earth mover’s distance is a measure of how different two distributions are by estimating the effort it takes to make the generated distribution equal to the real one.
+- Earth mover’s distance does not have flat regions when the distributions are different.
+
+
+#### 2.4 Wasserstein Loss
+An alternative loss function called ```Wasserstein Loss``` - ```W-Loss``` approximates the Earth Mover's Distance.
+
+
+
 
 # Conclusion
 
