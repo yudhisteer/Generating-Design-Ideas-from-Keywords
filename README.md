@@ -766,7 +766,12 @@ In summary:
 #### 2.5 Condition on Wasserstein Critic
 Recall W-Loss is a simple expression that computes the difference between the expected values of the critics output for the real examples ```x``` and its predictions on the fake examples ```G(z)```. The **generator** tries to ```minimize``` this expression: trying to get the generative examples to be as close as possible to the real examples while the **critic** wants to ```maximize``` this expression: it wants to differentiate between the reals and the fakes - it wants the distance to be as large as possible. 
 
-However, the condition is that the critic needs to be ``` 1-Lipschitz Continuous ``` or ```1-L Continuous``` which means that the norm of its gradient needs to be **at most** ```1```. That is, the slope or gradient can't be greater than ```1``` at any point. In order to check a function is 1-Lipschitz Continuous, we want to go along every point in the function and make sure its slope or gradient is <img src="https://latex.codecogs.com/svg.image?\leq&space;" title="https://latex.codecogs.com/svg.image?\leq " />  ```1```.
+However, the condition is that the critic needs to be ``` 1-Lipschitz Continuous ``` or ```1-L Continuous``` which means that the ```norm of its gradient``` needs to be **at most** ```1```. That is, the slope or gradient can't be greater than ```1``` at any point. In order to check a function is 1-Lipschitz Continuous, we want to go along every point in the function and make sure its slope or gradient is <img src="https://latex.codecogs.com/svg.image?\leq&space;" title="https://latex.codecogs.com/svg.image?\leq " />  ```1```.
+
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/162484119-5b6110e3-4394-485d-8cba-cbb54dcb25c5.png"/>
+</p>
 
 
 <p align="center">
@@ -786,6 +791,33 @@ Above is a smooth curve function. We want to again check every single point on t
 This condition on the critics neural network is important for W-Loss because it assures that the W-Loss function is not only ```continuous``` and ```differentiable``` but also that it doesn't grow too much and maintain some ```stability``` during training. This is what makes the underlying Earth Movers Distance valid, which is what W-Loss is founded on. This is required for training both the critic and generators neural networks and it also ```increases stability``` because the variation as the GAN learns will be **bounded**.
 
 #### 2.6 1-Lipschitz Continuity Enforcement
+Two common ways of ensuring this condition are ```weight clipping``` and ```gradient penalty```:
+
+##### 2.6.1 Weight clipping
+With weight clipping, the ```weights``` of the critics neural network are forced to take values between a ```fixed interval```. After we update the weights during gradient descent, we will actually clip any weights outside of the desired interval, i.e, weights that are either too high or too low will be set to the ```maximum``` or the ```minimum``` amount allowed. However this has a couple of downside. 
+
+- Forcing the weights of the critic to a limited range of values could ```limit``` the critics ability to ```learn``` and ultimately for the gradient to perform.
+- If the critic can't take on many different parameter values, it's weights can't take on many different values then it might not be able to improve easily or find a good global optima for it to be in.
+- Or on the other hand, it might actually ```limit``` the critic ```too little``` if we don't clip the weights enough.
+
+##### 2.6.2 Gradient penalty
+The gradient penalty is a much softer way to enforce the critic to be 1-lipschitz continuous. All we need to do is add a ```regularization``` term to our loss function which will **penalize** the critic when it's gradient norm is higher than ```1```.
+ 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/162486035-ef2c55c7-dc53-443e-9344-c3dd5afa0e83.png"/>
+</p>
+
+where ```reg``` is the regularization term and ```lambda``` is just a hyperparameter value of how much to weigh this regularization term against the main loss function. 
+
+In order to check the critics gradient at every possible point of the feature space, that's virtually impossible or at least not practical. Instead with gradient penalty what we will do is ```sample``` some points by ```interpolating``` between real and fake examples. 
+
+
+
+
+
+
+
+
 
 
 
