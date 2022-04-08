@@ -764,11 +764,28 @@ In summary:
 
 
 #### 2.5 Condition on Wasserstein Critic
+Recall W-Loss is a simple expression that computes the difference between the expected values of the critics output for the real examples ```x``` and its predictions on the fake examples ```G(z)```. The **generator** tries to ```minimize``` this expression: trying to get the generative examples to be as close as possible to the real examples while the **critic** wants to ```maximize``` this expression: it wants to differentiate between the reals and the fakes - it wants the distance to be as large as possible. 
+
+However, the condition is that the critic needs to be ``` 1-Lipschitz Continuous ``` or ```1-L Continuous``` which means that the norm of its gradient needs to be **at most** ```1```. That is, the slope or gradient can't be greater than ```1``` at any point. In order to check a function is 1-Lipschitz Continuous, we want to go along every point in the function and make sure its slope or gradient is <img src="https://latex.codecogs.com/svg.image?\leq&space;" title="https://latex.codecogs.com/svg.image?\leq " />  ```1```.
 
 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/162478767-916e9a1c-6ec8-4168-b864-d723d6f0986d.png" width="400" height="380"/>
+</p>
 
 
+In order to check that, we drew two lines of gradient ```1``` and ```-1``` respectively then we want to make sure that the ```growth``` of this function never goes out of **bounds** from these lines because staying within these lines means that the function is growing ```linearly```.   The function above is not 1-Lipschitz Continuous because it's not staying within this green area which suggests that it's growing more than linearly. 
 
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/162481575-48e90719-c8f1-4000-b3cc-5c4f157729e0.png" width="400" height="400"/>
+</p>
+
+Above is a smooth curve function. We want to again check every single point on this function before we can determine whether or not that this is 1-Lipschitz Continuous. We take every single value and the function never grows more than linearly hence , this function is 1-Lipschitz Continuous.
+
+This condition on the critics neural network is important for W-Loss because it assures that the W-Loss function is not only ```continuous``` and ```differentiable``` but also that it doesn't grow too much and maintain some ```stability``` during training. This is what makes the underlying Earth Movers Distance valid, which is what W-Loss is founded on. This is required for training both the critic and generators neural networks and it also ```increases stability``` because the variation as the GAN learns will be **bounded**.
+
+#### 2.6 1-Lipschitz Continuity Enforcement
 
 
 
