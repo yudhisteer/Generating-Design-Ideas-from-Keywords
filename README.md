@@ -931,6 +931,7 @@ class Generator(nn.Module):
 
 ##### 2.5.1 The Critic Model
 
+![image](https://user-images.githubusercontent.com/59663734/162629181-f2d2d2e5-d158-4135-b55b-9d5728588ad7.png)
 
 
 
