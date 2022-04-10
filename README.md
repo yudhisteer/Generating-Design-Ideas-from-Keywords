@@ -930,10 +930,61 @@ class Generator(nn.Module):
 
 
 ##### 2.5.1 The Critic Model
+For the discriminator, we create a network that takes ```128x128x3``` images and returns a ```scalar``` prediction score using a series of convolution layers with Instance Normalization and Leaky ReLU layers. 
+
+- For the convolution layers, we specify ```4x4``` filters with an increasing number of filters for each layer. We also specify a stride of ```2``` and padding of the output.
 
 ![image](https://user-images.githubusercontent.com/59663734/162629181-f2d2d2e5-d158-4135-b55b-9d5728588ad7.png)
 
+- For the leaky ReLU layers we have a negative slope of ```0.2```.
 
+- For the final convolution layer, specify a **one** ```4x4``` filter with no padding.
+
+![image](https://user-images.githubusercontent.com/59663734/162634863-98785fc5-96e4-4de1-943b-69f3a48afaa5.png)
+
+```
+## critic model
+
+class Critic(nn.Module):
+  def __init__(self, d_dim=16):
+    super(Critic, self).__init__()
+
+    self.crit = nn.Sequential(
+      # Conv2d: in_channels, out_channels, kernel_size, stride=1, padding=0
+      ## New width and height: # (n+2*pad-ks)//stride +1
+      ## we decrease size of image and increase number of channels
+
+      #-- we start with image of 128x128x3
+      nn.Conv2d(3, d_dim, 4, 2, 1), #(n+2*pad-ks)//stride +1 = (128+2*1-4)//2+1=64x64 (ch: 3 to 16) | 64x64x16
+      nn.InstanceNorm2d(d_dim), 
+      nn.LeakyReLU(0.2),
+
+      nn.Conv2d(d_dim, d_dim*2, 4, 2, 1), ## 32x32 (ch: 16 to 32) | 32x32x32
+      nn.InstanceNorm2d(d_dim*2), # Norm applied to previous layers
+      nn.LeakyReLU(0.2),
+
+      nn.Conv2d(d_dim*2, d_dim*4, 4, 2, 1), ## 16x16 (ch: 32 to 64) | 16x16x64
+      nn.InstanceNorm2d(d_dim*4), 
+      nn.LeakyReLU(0.2),
+              
+      nn.Conv2d(d_dim*4, d_dim*8, 4, 2, 1), ## 8x8 (ch: 64 to 128) | 8x8x128
+      nn.InstanceNorm2d(d_dim*8), 
+      nn.LeakyReLU(0.2),
+
+      nn.Conv2d(d_dim*8, d_dim*16, 4, 2, 1), ## 4x4 (ch: 128 to 256) | 4x4x256
+      nn.InstanceNorm2d(d_dim*16), 
+      nn.LeakyReLU(0.2),
+
+      nn.Conv2d(d_dim*16, 1, 4, 1, 0), #(n+2*pad-ks)//stride +1=(4+2*0-4)//1+1= 1X1 (ch: 256 to 1) | 1x1x1
+      #-- we end with image of 1x1x1 - single output(real or fake)
+    )
+
+
+  def forward(self, image):
+    # image: 128 x 3 x 128 x 128: batch x channels x width x height
+    crit_pred = self.crit(image) # 128 x 1 x 1 x 1: batch x  channel x width x height | one single value for each 128 image in batch
+    return crit_pred.view(len(crit_pred),-1) ## 128 x 1  
+```
 
 
 # Conclusion
