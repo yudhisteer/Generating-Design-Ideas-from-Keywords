@@ -822,6 +822,36 @@ where:
   <img src= "https://user-images.githubusercontent.com/59663734/162605675-257e162b-6c18-4c9d-8cc2-96c788801c4b.png"/>
 </p>
 
+**Note:** Since checking the critic’s gradient at each possible point of the feature space is virtually impossible, we can approximate this by using interpolated images.
+
+
+We get the gradient of the critics prediction on <img src="https://latex.codecogs.com/svg.image?\hat{x}" title="https://latex.codecogs.com/svg.image?\hat{x}" />, and then we take the norm of that gradient and we want the norm to be ```1```.  In fact it is penalizing any value outside of ```1```.  With this method, we're not strictly enforcing ```1-L continuity```, but you're just **encouraging** it. This has proven to work well and much better than weight clipping.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/162608155-07a8f0f0-9b22-47af-aa06-aa8ede1497ec.png"/>
+</p>
+
+The complete expression of the loss function that we use for training with ```W-loss``` gradient penalty now has these two components:
+
+1.  First, we approximate ```Earth Mover's distance``` with this main W-loss component. This makes the GAN less prone to mode collapse and vanishing gradient.
+2.  The second part of this loss function is a ```regularization term``` that meets the condition for what the critic desires in order to make this main term valid. Of course, this is a **soft constraint** on making the critic ```1-lipschitz continuous``` for the loss function to be ```continuous``` and ```differentiable```. 
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/162608514-cec2d004-b140-4565-9b75-09ba514a52ab.png"/>
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -848,3 +878,6 @@ where:
 14. https://medium.com/swlh/how-i-would-explain-gans-from-scratch-to-a-5-year-old-part-1-ce6a6bccebbb
 15. https://machinelearningmastery.com/how-to-implement-wasserstein-loss-for-generative-adversarial-networks/
 16. https://developers.google.com/machine-learning/gan/loss
+17. https://arxiv.org/abs/1701.07875
+18. https://arxiv.org/abs/1704.00028
+19. https://lilianweng.github.io/posts/2017-08-20-gan/
