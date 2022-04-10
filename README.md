@@ -11,7 +11,6 @@
     - The Discriminator
     - The Generator
     - Cross Entropy Cost Function
-    - Coding a Basic GAN
 
 2. Wasserstein GANs with Gradient Penalty
 
@@ -603,7 +602,6 @@ When the trained generator of a GAN synthesizes new instances, it's effectively 
   <img src= "https://user-images.githubusercontent.com/59663734/159677674-150fef07-783e-445c-ba96-b97853eac72a.gif" />
 </p>
 
-#### 1.5 Coding a Basic GAN
 
 ### 2. Wasserstein GANs with Gradient Penalty
 A major issue with GAN is when a GAN generates the same thing each time. For example, a GAN trained on all different cat breeds will only generate a Sphinx cat. This issue happens because the discriminator improves but it gets stuck between saying an image of a cat looks ```extremely fake``` or ```extremely real```. 
@@ -843,7 +841,7 @@ The complete expression of the loss function that we use for training with ```W-
 
 
 
-#### 2.5 Coding an Advanced GAN
+#### 2.5 Coding a GAN
 
 
 
