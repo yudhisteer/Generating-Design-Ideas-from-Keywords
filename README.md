@@ -843,17 +843,25 @@ The complete expression of the loss function that we use for training with ```W-
 
 
 
+#### 2.5 Coding an Advanced GAN
+
+
+
+
+#### 2.5.1 The Generator Model
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/162615819-36200885-5968-404d-8b41-11bf0bdab7f2.png"/>
+</p>
+
+
+![image](https://user-images.githubusercontent.com/59663734/162618739-9d906c91-6d0a-404e-a579-56138f5ec45f.png)
 
 
 
 
 
-
-
-
-
-
-
+#### 2.5.1 The Critic Model
 
 
 
