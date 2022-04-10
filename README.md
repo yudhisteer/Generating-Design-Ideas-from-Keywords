@@ -842,20 +842,90 @@ The complete expression of the loss function that we use for training with ```W-
 
 
 #### 2.5 Coding a GAN
+Recall that a GAN consists of two networks that train together:
+
+ - **Generator** — Given a vector of random values - ```noise``` as input, this network generates data with the same distribution as the training data. We train the generator to generate data that "_fools_" the discriminator.
+
+- **Discriminator** — Given batches of data containing observations from both the training data and generated data from the generator, this network attempts to classify the observations as ```real``` or ```fake```.We train the discriminator to distinguish between real and generated data.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/162626227-7ac760f2-4c27-44f8-9cdc-a16a93ff9a1d.png" width="650" height="150"/>
+</p>
 
 
+Ideally, twe want a generator that generates convincingly realistic data and a discriminator that has learned strong feature representations that are characteristic of the training data.
 
+We will use the ```CelebA Dataset``` to create a GAN that will generate persons' faces. We will build a **Generator** and **Critic** using ```Transposed Convolutions``` and ```Convolutions``` respectively. More explanations on convolutions can be found at this link: [Lane-Detection-with-Semantic-Segmentation](https://github.com/yudhisteer/Lane-Detection-with-Semantic-Segmentation)
 
 #### 2.5.1 The Generator Model
+We will first define the generator network architecture which generates images from ```1x1x200``` arrays of random values. The network:
+
+ - Converts the random vectors of size ```200``` to ```1x1x128``` arrays using a project and reshape - forward function.
+
+- Upscales the resulting arrays to ```64x64x3``` arrays using a series of transposed convolution layers and ReLU layers.
+
 
 <p align="center">
   <img src= "https://user-images.githubusercontent.com/59663734/162615819-36200885-5968-404d-8b41-11bf0bdab7f2.png"/>
 </p>
 
 
+
+- For the transposed convolution layers, we specify ```4x4``` **filters**(F) with a decreasing number of filters for each layer, a **stride** (S) of ```2```, and **padding** (P) amount.
+
+ - For the final transposed convolution layer, we specify three ```4x4``` filters corresponding to the ```3``` **RGB** channels of the generated images, and the output size of the previous layer.
+
+- At the end of the network, include a ```tanh``` layer.
+
 ![image](https://user-images.githubusercontent.com/59663734/162618739-9d906c91-6d0a-404e-a579-56138f5ec45f.png)
 
+```
+# generator model
 
+class Generator(nn.Module):
+  def __init__(self, z_dim=200, d_dim=16):
+    super(Generator, self).__init__()
+    self.z_dim=z_dim
+
+    self.gen = nn.Sequential(
+            ## ConvTranspose2d: in_channels, out_channels, kernel_size, stride=1, padding=0
+            ## Calculating new width and height: (n-1)*stride -2*padding +ks
+            ## n = width or height
+            ## ks = kernel size
+            ## we begin with a 1x1 image with z_dim number of channels (200) - initlalized z_dim = 200 | 1x1x200
+            ##  - we decrease no. of channels but increase size of image
+
+            nn.ConvTranspose2d(z_dim, d_dim * 32, 4, 1, 0), ## 4x4 image (ch: 200 to 512) | 4x4x512
+            nn.BatchNorm2d(d_dim*32),
+            nn.ReLU(True),
+
+            nn.ConvTranspose2d(d_dim*32, d_dim*16, 4, 2, 1), ## 8x8 image (ch: 512 to 256) | 8x8x256
+            nn.BatchNorm2d(d_dim*16),
+            nn.ReLU(True),
+
+            nn.ConvTranspose2d(d_dim*16, d_dim*8, 4, 2, 1), ## 16x16 image (ch: 256 to 128) | 16x16x128
+            #(n-1)*stride -2*padding +ks = (8-1)*2-2*1+4=16
+            nn.BatchNorm2d(d_dim*8),
+            nn.ReLU(True),
+
+            nn.ConvTranspose2d(d_dim*8, d_dim*4, 4, 2, 1), ## 32x32 image (ch: 128 to 64) | 32x32x64
+            nn.BatchNorm2d(d_dim*4),
+            nn.ReLU(True),            
+
+            nn.ConvTranspose2d(d_dim*4, d_dim*2, 4, 2, 1), ## 64x64 image (ch: 64 to 32) | 64x64x32
+            nn.BatchNorm2d(d_dim*2),
+            nn.ReLU(True),            
+
+            nn.ConvTranspose2d(d_dim*2, 3, 4, 2, 1), ## 128x128 image (ch: 32 to 3) | 128x128x3
+            nn.Tanh() ### produce result in the range from -1 to 1
+    )
+
+  #--- Function to project and reshape noise
+  def forward(self, noise):
+    x=noise.view(len(noise), self.z_dim, 1, 1)  # 128 batch x 200 no. of channels x 1 x 1 | len(noise) = batch size = 128
+    print('Noise size: ', x.shape)
+    return self.gen(x)
+```
 
 
 
