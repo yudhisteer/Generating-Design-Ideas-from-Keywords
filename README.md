@@ -809,11 +809,18 @@ The gradient penalty is a much softer way to enforce the critic to be 1-lipschit
 
 where ```reg``` is the regularization term and ```lambda``` is just a hyperparameter value of how much to weigh this regularization term against the main loss function. 
 
-In order to check the critics gradient at every possible point of the feature space, that's virtually impossible or at least not practical. Instead with gradient penalty what we will do is ```sample``` some points by ```interpolating``` between real and fake examples. 
+In order to check the critics gradient at every possible point of the feature space, that's virtually impossible or at least not practical. Instead with gradient penalty what we will do is ```sample``` some points by ```interpolating``` between real and fake examples using a random number ```epsilon```. It is on <img src="https://latex.codecogs.com/svg.image?\hat{x}" title="https://latex.codecogs.com/svg.image?\hat{x}" /> - the interpolated image - that we want to get the critics gradient to be <img src="https://latex.codecogs.com/svg.image?\leq&space;1&space;" title="https://latex.codecogs.com/svg.image?\leq 1 " />.
 
 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/162605691-7f9bbd06-e269-4276-b9e9-e4d37c3f22fb.png" width="700" height="350"/>
+</p>
 
+where:
 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/162605675-257e162b-6c18-4c9d-8cc2-96c788801c4b.png"/>
+</p>
 
 
 
