@@ -1017,12 +1017,13 @@ def get_gp(real, fake, crit, epsilon, lambda=10):
 ##### 2.5.4 Critic Training
 We will now train the critic using the following steps:
 
-1. Create ```noise``` using the **gen_noise** function.
-2. Project and reshape noise and pass it in our **Generator** model to create a ```Fake``` image.
-3. Get **predictions** on ```fake``` and ```real``` image.
-4. Generate random **epsilon** and calculate ```gradient penalty```.
-5. Calculate the critic ```loss``` using **gradient penalty**.
-6. Use ```backpropagation``` to update our critic **parameters**.
+1. Initialize **gradients** to ```0```.
+2. Create ```noise``` using the **gen_noise** function.
+3. Project and reshape noise and pass it in our **Generator** model to create a ```Fake``` image.
+4. Get **predictions** on ```fake``` and ```real``` image.
+5. Generate random **epsilon** and calculate ```gradient penalty```.
+6. Calculate the critic ```loss``` using **gradient penalty**.
+7. Use ```backpropagation``` to update our critic **parameters**.
 
 ```
     '''Critic Training'''
@@ -1058,10 +1059,57 @@ We will now train the critic using the following steps:
 
 ```
 
-
-
-
 ##### 2.5.5 Generator Training
+The training of the generator is much simpler:
+
+1. Initialize **gradients** to ```0```.
+2. Create ```noise``` **vector**.
+3. Generate ```fake``` **image** from noise vector.
+4. Get critic's ```prediction``` on **fake** image.
+5. Calculate **generator's** ```loss```.
+6. Use ```backpropagation``` to update generator's **parameters**.
+
+```
+    '''Generator Training'''
+    #--- Initialize Gradients to 0
+    gen_opt.zero_grad()
+
+    #---Create Noise Vector
+    noise = gen_noise(cur_bs, z_dim)
+    #---Create Fake image from Noise vector
+    fake = gen(noise)
+
+    #---Critic's prediction on fake image
+    crit_fake_pred = crit(fake)
+
+    #--- Calculate Generator Loss
+    gen_loss = -crit_fake_pred.mean()
+
+    #---Backpropagation
+    gen_loss.backward()
+    #--- Update generator's paramaters
+    gen_opt.step()
+
+    #--- Append Generator Loss
+    gen_losses+=[gen_loss.item()]
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
