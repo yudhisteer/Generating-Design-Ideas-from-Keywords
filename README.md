@@ -929,7 +929,7 @@ class Generator(nn.Module):
 
 
 
-##### 2.5.1 The Critic Model
+##### 2.5.2 The Critic Model
 For the discriminator, we create a network that takes ```128x128x3``` images and returns a ```scalar``` prediction score using a series of convolution layers with Instance Normalization and Leaky ReLU layers. 
 
 - For the convolution layers, we specify ```4x4``` filters with an increasing number of filters for each layer. We also specify a stride of ```2``` and padding of the output.
@@ -985,6 +985,85 @@ class Critic(nn.Module):
     crit_pred = self.crit(image) # 128 x 1 x 1 x 1: batch x  channel x width x height | one single value for each 128 image in batch
     return crit_pred.view(len(crit_pred),-1) ## 128 x 1  
 ```
+
+##### 2.5.3 The Gradient Penalty
+The gradient penalty improves stability by penalizing gradients with large norm values. The lambda value controls the magnitude of the gradient penalty added to the discriminator loss. Recall that we need to create an interpolated image using real and fake images weighted by ```epsilon```. Then based on the gradient of the prediction of the critic on the interpolated image we will add a regularization term in our loss function.
+
+
+```
+## gradient penalty calculation
+
+def get_gp(real, fake, crit, epsilon, lambda=10):
+  interpolated_images = real * epsilon + fake * (1-epsilon) # 128 x 3 x 128 x 128 | Linear Interpolation
+  interpolated_scores = crit(interpolated_images) # 128 x 1 | prediction of critic
+
+  # Analyze gradients if too large
+  gradient = torch.autograd.grad(
+      inputs = interpolated_images,
+      outputs = interpolated_scores,
+      grad_outputs=torch.ones_like(interpolated_scores),
+      retain_graph=True,
+      create_graph=True,
+  )[0] # 128 x 3 x 128 x 128
+
+  gradient = gradient.view(len(gradient), -1)   # 128 x 49152
+  gradient_norm = gradient.norm(2, dim=1)  # L2 norm
+  gp = lambda * ((gradient_norm-1)**2).mean()
+
+  return gp
+```
+
+
+##### 2.5.4 Critic Training
+We will now train the critic using the following steps:
+
+1. Create ```noise``` using the **gen_noise** function.
+2. Project and reshape noise and pass it in our **Generator** model to create a ```Fake``` image.
+3. Get **predictions** on ```fake``` and ```real``` image.
+4. Generate random **epsilon** and calculate ```gradient penalty```.
+5. Calculate the critic ```loss``` using **gradient penalty**.
+6. Use ```backpropagation``` to update our critic **parameters**.
+
+```
+    '''Critic Training'''
+
+    mean_crit_loss = 0
+    for _ in range(crit_cycles):
+      crit_opt.zero_grad()
+      
+      #--- Create Noise
+      noise=gen_noise(cur_bs, z_dim)
+      #---Create Fake Image from Noise
+      fake = gen(noise)
+
+      #--- Get prediction on fake and real image
+      crit_fake_pred = crit(fake.detach())
+      crit_real_pred = crit(real)
+
+      #--- Calculate gradient penalty
+      epsilon=torch.rand(len(real),1,1,1,device=device, requires_grad=True) # 128 x 1 x 1 x 1
+      gp = get_gp(real, fake.detach(), crit, epsilon)
+
+      #--- Calculate Loss
+      crit_loss = crit_fake_pred.mean() - crit_real_pred.mean() + gp
+      mean_crit_loss+=crit_loss.item() / crit_cycles
+
+      #--- Backpropagation
+      crit_loss.backward(retain_graph=True)
+      #--- Update parameter of critic
+      crit_opt.step()
+
+    #--- Append Critic Loss
+    crit_losses+=[mean_crit_loss]
+
+```
+
+
+
+
+##### 2.5.5 Generator Training
+
+
 
 
 # Conclusion
