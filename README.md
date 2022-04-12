@@ -857,6 +857,11 @@ Ideally, twe want a generator that generates convincingly realistic data and a d
 
 We will use the ```CelebA Dataset``` to create a GAN that will generate persons' faces. We will build a **Generator** and **Critic** using ```Transposed Convolutions``` and ```Convolutions``` respectively. More explanations on convolutions can be found at this link: [Lane-Detection-with-Semantic-Segmentation](https://github.com/yudhisteer/Lane-Detection-with-Semantic-Segmentation)
 
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/162926443-94916263-987e-4ccb-8051-bb12be797035.png" width="350" height="350"/>
+</p>
+
 ##### 2.5.1 The Generator Model
 We will first define the generator network architecture which generates images from ```1x1x200``` arrays of random values. The network:
 
@@ -1094,6 +1099,12 @@ The training of the generator is much simpler:
     gen_losses+=[gen_loss.item()]
 ```
 
+##### 2.5.6 Training results
+
+
+
+
+##### 2.5.7 Testing
 
 
 
@@ -1102,10 +1113,7 @@ The training of the generator is much simpler:
 
 
 
-
-
-
-
+##### 2.5.8 Morphing
 
 
 
