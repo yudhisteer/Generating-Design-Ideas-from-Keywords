@@ -18,9 +18,11 @@
     - Limitation of BCE Loss
     - Earth Mover Distance
     - Wasserstein Loss
-    - 
-    - 
-3. Conditional GAN and Controllable Generation
+    - Condition on Wasserstein Critic
+    - 1-Lipschitz Continuity Enforcement
+    - Coding a WGAN
+
+3. Multimodal Generation
 
 
 ### 1. Understanding a Basic GAN
@@ -841,7 +843,7 @@ The complete expression of the loss function that we use for training with ```W-
 
 
 
-#### 2.5 Coding a GAN
+#### 2.7 Coding a WGAN
 Recall that a GAN consists of two networks that train together:
 
  - **Generator** — Given a vector of random values - ```noise``` as input, this network generates data with the same distribution as the training data. We train the generator to generate data that "_fools_" the discriminator.
@@ -862,7 +864,7 @@ We will use the ```CelebA Dataset``` to create a GAN that will generate persons'
   <img src= "https://user-images.githubusercontent.com/59663734/162926443-94916263-987e-4ccb-8051-bb12be797035.png" width="350" height="350"/>
 </p>
 
-##### 2.5.1 The Generator Model
+##### 2.7.1 The Generator Model
 We will first define the generator network architecture which generates images from ```1x1x200``` arrays of random values. The network:
 
  - Converts the random vectors of size ```200``` to ```1x1x128``` arrays using a project and reshape - forward function.
@@ -934,7 +936,7 @@ class Generator(nn.Module):
 
 
 
-##### 2.5.2 The Critic Model
+##### 2.7.2 The Critic Model
 For the discriminator, we create a network that takes ```128x128x3``` images and returns a ```scalar``` prediction score using a series of convolution layers with Instance Normalization and Leaky ReLU layers. 
 
 - For the convolution layers, we specify ```4x4``` filters with an increasing number of filters for each layer. We also specify a stride of ```2``` and padding of the output.
@@ -991,7 +993,7 @@ class Critic(nn.Module):
     return crit_pred.view(len(crit_pred),-1) ## 128 x 1  
 ```
 
-##### 2.5.3 The Gradient Penalty
+##### 2.7.3 The Gradient Penalty
 The gradient penalty improves stability by penalizing gradients with large norm values. The lambda value controls the magnitude of the gradient penalty added to the discriminator loss. Recall that we need to create an interpolated image using real and fake images weighted by ```epsilon```. Then based on the gradient of the prediction of the critic on the interpolated image we will add a regularization term in our loss function.
 
 
@@ -1019,7 +1021,7 @@ def get_gp(real, fake, crit, epsilon, lambda=10):
 ```
 
 
-##### 2.5.4 Critic Training
+##### 2.7.4 Critic Training
 We will now train the critic using the following steps:
 
 1. Initialize **gradients** to ```0```.
@@ -1064,7 +1066,7 @@ We will now train the critic using the following steps:
 
 ```
 
-##### 2.5.5 Generator Training
+##### 2.7.5 Generator Training
 The training of the generator is much simpler:
 
 1. Initialize **gradients** to ```0```.
@@ -1099,21 +1101,24 @@ The training of the generator is much simpler:
     gen_losses+=[gen_loss.item()]
 ```
 
-##### 2.5.6 Training results
+##### 2.7.6 Training results
+
+##### 2.7.7 Testing
+
+##### 2.7.8 Morphing
+
+
+### 3. Multimodal Generation
 
 
 
 
-##### 2.5.7 Testing
 
 
 
 
 
 
-
-
-##### 2.5.8 Morphing
 
 
 
