@@ -886,7 +886,7 @@ We will first define the generator network architecture which generates images f
 
 ![image](https://user-images.githubusercontent.com/59663734/162618739-9d906c91-6d0a-404e-a579-56138f5ec45f.png)
 
-```
+```python
 # generator model
 
 class Generator(nn.Module):
@@ -949,7 +949,7 @@ For the discriminator, we create a network that takes ```128x128x3``` images and
 
 ![image](https://user-images.githubusercontent.com/59663734/162634863-98785fc5-96e4-4de1-943b-69f3a48afaa5.png)
 
-```
+```python
 ## critic model
 
 class Critic(nn.Module):
@@ -997,7 +997,7 @@ class Critic(nn.Module):
 The gradient penalty improves stability by penalizing gradients with large norm values. The lambda value controls the magnitude of the gradient penalty added to the discriminator loss. Recall that we need to create an interpolated image using real and fake images weighted by ```epsilon```. Then based on the gradient of the prediction of the critic on the interpolated image we will add a regularization term in our loss function.
 
 
-```
+```python
 ## gradient penalty calculation
 
 def get_gp(real, fake, crit, epsilon, lambda=10):
@@ -1032,7 +1032,7 @@ We will now train the critic using the following steps:
 6. Calculate the critic ```loss``` using **gradient penalty**.
 7. Use ```backpropagation``` to update our critic **parameters**.
 
-```
+```python
     '''Critic Training'''
 
     mean_crit_loss = 0
@@ -1076,7 +1076,7 @@ The training of the generator is much simpler:
 5. Calculate **generator's** ```loss```.
 6. Use ```backpropagation``` to update generator's **parameters**.
 
-```
+```python
     '''Generator Training'''
     #--- Initialize Gradients to 0
     gen_opt.zero_grad()
@@ -1104,6 +1104,7 @@ The training of the generator is much simpler:
 ##### 2.7.6 Training results
 We being training our GAN with the following hyperparameters:
 
+- Number of images: 10000
 - Number of epochs: 50000
 - Batch size: 128
 - Number of steps per epoch: Number of epochs/Batch size = 50000/128 = 390.625
@@ -1138,10 +1139,21 @@ Below is the results of the training. The first ```200``` steps are just **noise
 https://user-images.githubusercontent.com/59663734/165896265-f9494889-6ab6-4958-914a-b00985b9d06f.mp4
 
 
-
-
-
 ##### 2.7.7 Testing
+With our model saved, we will use the generator and scrape out the discriminator to generate new faces from noise. 
+
+```python
+#### Generate new faces
+noise = gen_noise(batch_size, z_dim)
+fake = gen(noise)
+show(fake)
+```
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/165916810-c286c8bf-116e-4c91-b21d-6f20d20f4cdf.png" width="650" height="300" />
+</p>
+
+Note that we are actually displaying 25 images at a time but the generator output 1 images at each step. Although the picture is highly pixelated, it will be hard to distinguish whether it is real or fake.
 
 ##### 2.7.8 Morphing
 
