@@ -22,6 +22,10 @@
     - 1-Lipschitz Continuity Enforcement
     - Coding a WGAN
 
+3. Controllable and Conditional GAN
+
+Although we are generating very good fake images from our WGAN, we do not really have a control of the type of faces to generate. 
+
 3. Multimodal Generation
 
 
@@ -1166,7 +1170,9 @@ We can also interpolate between two points in the latent space to see how the im
 </p>
 
 
-### 3. Multimodal Generation
+### 3. Controllable and Conditional GAN
+
+Although we are generating very good fake images from our WGAN, we do not really have a **control** of the type of faces to generate. For example, if I want to generate only ```women``` faces I would not be able to do that. What we have been doing is called ```unconditional generation```. What we want to achieve is ```Conditional``` generation, that is, we tell our model to generate different items we specify or condition and we adapt the training process so it actually does that. There is also ```Controllable``` generation where we figure out how to adapt the inputs to our model without changing the model itself. 
 
 
 
