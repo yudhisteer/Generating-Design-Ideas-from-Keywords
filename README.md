@@ -1236,3 +1236,4 @@ In summary:
 17. https://arxiv.org/abs/1701.07875
 18. https://arxiv.org/abs/1704.00028
 19. https://lilianweng.github.io/posts/2017-08-20-gan/
+20. https://arxiv.org/abs/1411.1784
