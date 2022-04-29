@@ -1208,9 +1208,21 @@ In summary:
 - The size of the vector and the number of matrices represent the number of classes.
 
 #### 3.2 Controllable GAN
+While conditional generation leverages labels during training, controllable gan focus on controlling what features we want in the output examples even **after** the model has been trained. For instance, with a gan that performs face generation, we could control the ```age``` of the person's looks in the image or if they have ```sunglasses``` or the ```direction``` they're looking at in the picture, or even they're perceived ```gender```.
 
+We do this by actually tweaking the input noise vector ```Z``` that is fed to the generator **after** we train the model.  With an input noise vector ```Z```  we can get this picture of a woman with **red** hair. But if we tweak one of the features, representing changing hair color,  from this input noise vector maybe we get the same woman but with **blue** hair.
 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/165940613-299699ae-2fb3-40e5-b344-0f706770e98e.gif" />
+</p>
 
+Let's see how controllable differ from conditional GANs:
+
+- With controllable generation we get examples with features that we want but with conditional generation we get examples from classes that we want.
+- We do not need a labeled dataset for controllable gan but we do need a labeled dataset for conditional generation.
+- In controllable gan, we tweak the input noise vector ```Z``` while with conditional generation, we have to pass additional information representing the class that we want appendeded to that noise vector
+
+Note however that sometimes controllable generation can definitely include conditional generation
 
 
 
