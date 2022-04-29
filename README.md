@@ -1130,8 +1130,11 @@ With time, the loss of the critic drops to become negative, i.e, it outputs a sm
 3. The absolute value of the critic (average ```7```) is much **lower** than the absolute value of the generator (average ```22```). This is because we are training the critic 5 times more for everyt training of the generator. It allows the critic to not be overpowered by the generator. 
 
 4. Unfortunately, the loss for both the critic and the generator does not approach **zero**. We observe that the loss of the generator approaches its minimum at about 6000 steps while the loss of the critic remains mainly constant.
+5. 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/165896193-ce40cfa1-880f-4aad-9718-9287407dbe75.jpg" width="700" height="350" />
+</p>
 
-![LOSS](https://user-images.githubusercontent.com/59663734/165896193-ce40cfa1-880f-4aad-9718-9287407dbe75.jpg)
 
 
 Below is the results of the training. The first ```200``` steps are just **noise** with no particular structure in the data. But with time, we can clearly see some facial features appearing in the noise at about ```800``` steps. At the end of ```6000``` steps, we successfully generate faces while not very high definition. 
@@ -1156,6 +1159,11 @@ show(fake)
 Note that we are actually displaying 25 images at a time but the generator output 1 images at each step. Although the picture is highly pixelated, it will be hard to distinguish whether it is real or fake.
 
 ##### 2.7.8 Morphing
+We can also interpolate between two points in the latent space to see how the image of a picture morph to become another one. Note that the AI has only been trained with 10000 images and since our loss function did not approach to zero as near as possible, the interpolation is quite rudimentary. Yet, it is still impressive to see the result.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/165918820-c3a2cb7e-5785-4a5c-86ab-123279358db3.png" width="800" height="250" />
+</p>
 
 
 ### 3. Multimodal Generation
