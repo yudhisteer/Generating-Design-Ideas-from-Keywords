@@ -1190,13 +1190,22 @@ In the example below, we generate a Sphinx cat from one noise vector but when we
   <img src= "https://user-images.githubusercontent.com/59663734/165928657-3b537065-1782-489e-af2b-7bdf9adf66a9.gif" />
 </p>
 
-The discriminator in a similar way will take the examples, but now it is paired with the ```class``` information as inputs to determine if the examples are either real or fake representations of that particular class.
+The discriminator in a similar way will take the examples, but now it is paired with the ```class``` information as inputs to determine if the examples are either real or fake representations of that particular class. For the discriminator to predict that an example is real, it needs to look like the examples from that class in the training data set. 
 
 <p align="center">
-  <img src= "https://user-images.githubusercontent.com/59663734/165930816-08c24be3-c709-452c-a5a1-66ffd7424016.gif" />
+  <img src= "https://user-images.githubusercontent.com/59663734/165934497-4576f679-69db-4799-aa3b-005f02e544c3.gif" />
 </p>
 
+The image is fed in as ```3``` different channels -RGB - or just one channel if it's a gray-scale image. Then the one-hot class information is also fed in as additional channels where all the channels take on values of ```zeros``` whereas this black one will take on values of ```ones```. In contrast to that one-hot vector, these are typically much larger matrices where each channel is full of zeros at every position where it's not that class.
 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/165935913-047d1983-8b78-424a-848d-9be79821321d.png" width="500" height="300" />
+</p>
+
+In summary:
+- The class is passed to the generator as one-hot vestors.
+- The class is passed to the discriminator as one-got matrices.
+- The size of the vector and the number of matrices represent the number of classes.
 
 #### 3.2 Controllable GAN
 
