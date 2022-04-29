@@ -1126,14 +1126,14 @@ With time, the loss of the critic drops to become negative, i.e, it outputs a sm
 
 2. The loss of the generator is positive because a larger score from the critic will result in a smaller loss for the generator, encouraging the critic to output larger scores for fake images.
 
-3. The absolute value of the critic (average 7) is much **lower** than the absolute value of the generator (average 22). This is because we are training the critic 5 times more for everyt training of the generator. It allows the critic to not be overpowered by the generator. 
+3. The absolute value of the critic (average ```7```) is much **lower** than the absolute value of the generator (average ```22```). This is because we are training the critic 5 times more for everyt training of the generator. It allows the critic to not be overpowered by the generator. 
 
 4. Unfortunately, the loss for both the critic and the generator does not approach **zero**. We observe that the loss of the generator approaches its minimum at about 6000 steps while the loss of the critic remains mainly constant.
 
 ![LOSS](https://user-images.githubusercontent.com/59663734/165896193-ce40cfa1-880f-4aad-9718-9287407dbe75.jpg)
 
 
-Below is the results of the training. The initial images are just **noise** with no particular structure in the data. But with time, we can clearly see some facial features appearing in the noise at about 2500 steps. At the end of 6000 steps, we successfully generate faces while not very high definition. 
+Below is the results of the training. The first ```200``` steps are just **noise** with no particular structure in the data. But with time, we can clearly see some facial features appearing in the noise at about ```800``` steps. At the end of ```6000``` steps, we successfully generate faces while not very high definition. 
 
 https://user-images.githubusercontent.com/59663734/165896265-f9494889-6ab6-4958-914a-b00985b9d06f.mp4
 
