@@ -1134,7 +1134,7 @@ With time, the loss of the critic drops to become negative, i.e, it outputs a sm
 3. The absolute value of the critic (average ```7```) is much **lower** than the absolute value of the generator (average ```22```). This is because we are training the critic 5 times more for everyt training of the generator. It allows the critic to not be overpowered by the generator. 
 
 4. Unfortunately, the loss for both the critic and the generator does not approach **zero**. We observe that the loss of the generator approaches its minimum at about 6000 steps while the loss of the critic remains mainly constant.
-5. 
+
 <p align="center">
   <img src= "https://user-images.githubusercontent.com/59663734/165896193-ce40cfa1-880f-4aad-9718-9287407dbe75.jpg" width="700" height="350" />
 </p>
@@ -1174,17 +1174,31 @@ We can also interpolate between two points in the latent space to see how the im
 
 Although we are generating very good fake images from our WGAN, we do not really have a **control** of the type of faces to generate. For example, if I want to generate only ```women``` faces I would not be able to do that. What we have been doing is called ```unconditional generation```. What we want to achieve is ```Conditional``` generation, that is, we tell our model to generate different items we specify or condition and we adapt the training process so it actually does that. There is also ```Controllable``` generation where we figure out how to adapt the inputs to our model without changing the model itself. 
 
+#### 3.1 Conditional GAN
+We will now control the output and get examples from a particular class or for those examples to take on certain features. Below are the key differences between unconditional and conditional GAN:
+
+1. With unconditional we get examples from random classes whereas with conditional gan we get examples from the classes we specify.
+2. The training dataset is not labeled for unconditional whereas for conditional gan is should be labeled and the label are the different class we want. 
+
+With unconditional generation, the generator needs a **noise** vector to produce random examples. For conditional generation, we also need a vector to tell the generator from which class the generated examples should come from. Usually this is a ```one-hot vector```, which means that there are ```zeros``` in every position except for one position corresponding to the class we want. In the example below, we specify a ```one```at Sphinx cat because that's the class that we want the generator to create images of. 
+
+The noise vector is the one that adds ```randomness``` in the generation, similar to before; to let us produce a diverse set of examples. But now it's a diverse set **within** the certain class, **conditioned** on the certain class and **restricted** by the second class. The input to the generator in a conditional GAN is actually a ```concatenated vector``` of both the noise and the one-hot class information.
+
+In the example below, we generate a Sphinx cat from one noise vector but when we change that noise vector while the class information stays the same, it produces another picture of a Sphinx cat.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/165928657-3b537065-1782-489e-af2b-7bdf9adf66a9.gif" />
+</p>
+
+The discriminator in a similar way will take the examples, but now it is paired with the ```class``` information as inputs to determine if the examples are either real or fake representations of that particular class.
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/165930816-08c24be3-c709-452c-a5a1-66ffd7424016.gif" />
+</p>
 
 
 
-
-
-
-
-
-
-
-
+#### 3.2 Controllable GAN
 
 
 
