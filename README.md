@@ -1,4 +1,4 @@
-# Generating Design Ideas from Keywords
+# Generative AI: Generating Design Ideas from Keywords
 
 ## Abstract
 ## Research Questions
@@ -1102,6 +1102,34 @@ The training of the generator is much simpler:
 ```
 
 ##### 2.7.6 Training results
+We being training our GAN with the following hyperparameters:
+
+- Number of epochs: 50000
+- Batch size: 128
+- Number of steps per epoch: Number of epochs/Batch size = 50000/128 = 390.625
+- Learning rate: 0.0001
+- Dimension of noise vector: 200
+- Optimizer: Adam
+- Critic cycles: 5 (we train critic 5 times + 1 train of generator - so that critic is not overpowered by generator)
+
+We plot the graph of the Generator loss and Critic loss w.r.t to the number of steps. Some important features of the graph are:
+
+1. The critic loss (red) is initially positive (not clearly shown on the graph). This is because of the loss function of our critic:
+
+<p align="center">
+  <img src= "https://latex.codecogs.com/png.image?\dpi{110}\underset{C}{max}(\mathbb{E}\cdot&space;C(x))&space;-&space;(\mathbb{E}\cdot&space;C(G(z)))" title="https://latex.codecogs.com/png.image?\dpi{110}\underset{C}{max}(\mathbb{E}\cdot C(x)) - (\mathbb{E}\cdot C(G(z)))"/>
+</p>
+
+
+![LOSS](https://user-images.githubusercontent.com/59663734/165896193-ce40cfa1-880f-4aad-9718-9287407dbe75.jpg)
+
+
+
+https://user-images.githubusercontent.com/59663734/165896265-f9494889-6ab6-4958-914a-b00985b9d06f.mp4
+
+
+
+
 
 ##### 2.7.7 Testing
 
