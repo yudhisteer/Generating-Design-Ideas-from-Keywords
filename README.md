@@ -29,9 +29,8 @@
 
 3. Controllable and Conditional GAN
 
-Although we are generating very good fake images from our WGAN, we do not really have a control of the type of faces to generate. 
 
-3. Multimodal Generation
+4. Multimodal Generation
 
 
 ### 1. Understanding a Basic GAN
