@@ -1,9 +1,14 @@
 # Generative AI: Generating Design Ideas from Keywords
 
 ## Abstract
-## Research Questions
+
+
 ## Datasets
+
+
 ## Methods
+
+
 ## Plan of Action
 1. Understanding a Basic GAN
     - Types of AI
