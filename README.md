@@ -1346,7 +1346,9 @@ The VQGAN-CLIP architecture kind of blurs the distinction of training-vs-inferen
 
 We’re not training a VQGAN model and we’re also not training a CLIP model. Both models are already ```pretrained``` and their **weights** are ```frozen``` during the run of the notebook. What’s being optimised (or “trained”) is ```Z (noise)``` , the latent image vector that is being passed as an input to VQGAN.
 
+**Forward pass**: We start with a noise vector ```z```, a VQGAN-encoded image vector, pass it to VQGAN to synthesize/decode an actual image out of it, then we cut it into pieces, then we encode these pieces with CLIP, calculate the distance to the text prompt and get out some loss(es).
 
+**Backward pass**: We backpropagate through ```CLIP``` and ```VQGAN``` all the way back to the latent vector ```z``` and then use gradient ascent to update ```z```.
 
 
 
