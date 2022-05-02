@@ -1256,7 +1256,17 @@ To sum up, controllable generation works by moving the noise vector in different
 ### 4. Multimodal GAN
 
 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/166186148-30e1705e-0fa0-42ea-be34-116f901567f9.png" width="450" height="300"/>
+</p>
+
+
+
 #### 4.1 CLIP: Contrastive Language Image Pre-training
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/166186854-45497825-2f3b-45b0-abaa-277692e961cd.gif"/>
+</p>
+
 
 ![image](https://user-images.githubusercontent.com/59663734/166175117-1857ebe4-7ccb-4562-ade4-ab08afcbe5ce.png)
 
