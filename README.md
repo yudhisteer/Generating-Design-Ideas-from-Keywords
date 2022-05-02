@@ -1327,6 +1327,9 @@ _Eventhough both VQGAN and CLIP models are pretrained when you use them in VQGAN
 
 The VQGAN-CLIP architecture kind of blurs the distinction of training-vs-inference, because when we “run” VQGAN-CLIP we’re kind of doing ```inference```, but we’re also ```optimizing```. This special case of inference has been called “inference-by-optimization”. That’s why we need a **GPU** to run VQGAN-CLIP.
 
+![image](https://user-images.githubusercontent.com/59663734/166194451-be9a25dc-d254-4948-994e-cc4da0400140.png)
+
+
 We’re not training a VQGAN model and we’re also not training a CLIP model. Both models are already ```pretrained``` and their **weights** are ```frozen``` during the run of the notebook. What’s being optimised (or “trained”) is ```Z (noise)``` , the latent image vector that is being passed as an input to VQGAN.
 
 
