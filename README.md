@@ -14,7 +14,7 @@
 
 2. The [ImageNet](https://image-net.org/download.php) dataset, one of the largest efforts in this space, required over ```25,000``` workers to annotate ```14 million``` images for ```22,000``` object categories. 
 
-3. In contrast, CLIP learns from text–image pairs that are already publicly available on the internet. CLIP was trained on a vast (and ```unknown```) dataset of random internet material. CLIP creates an encoding of its classes and is pre-trained on over ```400 million``` **text** to **image** pairs. This allows it to leverage transformer models' ability to extract semantic meaning from text to make image classifications out of the box without being fine-tuned on custom data.
+3. ```CLIP``` learns from text–image pairs that are already publicly available on the internet. CLIP was trained on a vast (and ```unknown```) dataset of random internet material. CLIP creates an encoding of its classes and is pre-trained on over ```400 million``` **text** to **image** pairs. This allows it to leverage transformer models' ability to extract semantic meaning from text to make image classifications out of the box without being fine-tuned on custom data.
 
 ## Methods
 
