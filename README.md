@@ -5,6 +5,8 @@
 
 ## Datasets
 
+2. CLIP was trained on a vast (and ```unknown```) dataset of random internet material. Which makes it so exciting but also slightly scary and unpredictable.
+
 
 ## Methods
 
@@ -1254,25 +1256,65 @@ To sum up, controllable generation works by moving the noise vector in different
 
 
 ### 4. Multimodal GAN
+The model which we will use connects two existing (open-source, pretrained) models: CLIP (OpenAI) and VQGAN (Esser et al. from Heidelberg University). VQGAN+CLIP is a ```text-to-image``` model that generates images of variable size given a set of ```text prompts``` (and some other parameters).
 
+In essence, the way they work is that **VQGAN** ```generates``` the images, while **CLIP** ```judges``` how well an image matches the text prompt. This interaction guides the generator(VQGAN) to produce more accurate images.
+
+#### 4.1 CLIP: Contrastive Language Image Pre-training
+
+- a model trained to determine which caption from a set of captions best fits with a given image
+- CLIP = Contrastive Language–Image Pre-training
+- it also uses Transformers
+- proposed by OpenAI in January 2021
+- Paper: “Learning transferable visual models from natural language supervision”
+- Git Repository: https://github.com/openai/CLIP
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/166186854-45497825-2f3b-45b0-abaa-277692e961cd.gif"/>
+</p>
+
+The revolutionary thing about CLIP is that it is capable of ```zero-shot learning```. That means that it performs exceptionally well on previously **unseen** datasets.
+
+![image](https://user-images.githubusercontent.com/59663734/166175117-1857ebe4-7ccb-4562-ade4-ab08afcbe5ce.png)
+
+#### 4.2 VQGAN: Vector Quantized Generative Adversarial Network
+
+- a type of neural network architecture
+- VQGAN = Vector Quantized Generative Adversarial Network
+- was first proposed in the paper “Taming Transformers” by University Heidelberg (2020)
+- it combines convolutional neural networks (traditionally used for images) with Transformers (traditionally used for language)
+- it’s great for high-resolution images
+
+_Although VQGAN involves Transformers the models are not trained with text, but pure image data. They just apply the Transformer architecture that was previously used for text to images, which is an important innovation._
+
+
+#### 4.3 CLIP + VQGAN
+
+**CLIP** ```guides``` **VQGAN** towards an image that is the best match to a given text.
+
+Note that contrary to VQGAN, CLIP is not a generative model. CLIP is “just” trained to represent both text and images very well. The revolutionary thing about CLIP is that it is capable of zero-shot learning. That means that it performs exceptionally well on previously unseen datasets
+
+“CLIP is a model that was originally intended for doing things like searching for the best match to a description like “a dog playing the violin” among a number of images. By pairing a network that can produce images (a “generator” of some sort) with CLIP, it is possible to tweak the generator’s input to try to match a description.”
+
+So how does it work:
+
+1. VQGAN: Like all GANs VQGAN takes in a ```noise vector``` and outputs a (realistic) image.
+
+2. CLIP on the other hand takes in:
+- (a) an image, and outputs the image features; or
+- (b) a text, and outputs text features.
+- 
+The similarity between **image** and **text** can be represented by the ```cosine similarity``` of the learnt feature vectors.
 
 <p align="center">
   <img src= "https://user-images.githubusercontent.com/59663734/166186148-30e1705e-0fa0-42ea-be34-116f901567f9.png" width="450" height="300"/>
 </p>
 
+We can use CLIP to guide a search through **VQGAN**’s ```latent space``` to find images that match a text prompt very well according to **CLIP**.
 
+**Note:**
+_Eventhough both VQGAN and CLIP models are pretrained when you use them in VQGAN, you basically train it (again) for every prompt you give to it. That is different to “normal” GANs where you train it one time (or you use a pretrained model) and then you just do inference in order to generate an image._
 
-#### 4.1 CLIP: Contrastive Language Image Pre-training
-<p align="center">
-  <img src= "https://user-images.githubusercontent.com/59663734/166186854-45497825-2f3b-45b0-abaa-277692e961cd.gif"/>
-</p>
-
-
-![image](https://user-images.githubusercontent.com/59663734/166175117-1857ebe4-7ccb-4562-ade4-ab08afcbe5ce.png)
-
-
-
-#### 4.1 VQGAN: Vector Quantized Generative Adversarial Network
 
 # Conclusion
 
@@ -1297,3 +1339,5 @@ To sum up, controllable generation works by moving the noise vector in different
 18. https://arxiv.org/abs/1704.00028
 19. https://lilianweng.github.io/posts/2017-08-20-gan/
 20. https://arxiv.org/abs/1411.1784
+21. https://alexasteinbruck.medium.com/explaining-the-code-of-the-popular-text-to-image-algorithm-vqgan-clip-a0c48697a7ff
+22. https://alexasteinbruck.medium.com/vqgan-clip-how-does-it-work-210a5dca5e52
