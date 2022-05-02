@@ -1364,3 +1364,4 @@ We’re not training a VQGAN model and we’re also not training a CLIP model. B
 22. https://alexasteinbruck.medium.com/vqgan-clip-how-does-it-work-210a5dca5e52
 23. https://ljvmiranda921.github.io/notebook/2021/08/08/clip-vqgan/
 24. https://www.vice.com/en/article/n7bqj7/ai-generated-art-scene-explodes-as-hackers-create-groundbreaking-new-tools
+25. https://arxiv.org/pdf/2012.09841.pdf
