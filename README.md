@@ -1256,6 +1256,14 @@ To sum up, controllable generation works by moving the noise vector in different
 ### 4. Multimodal GAN
 
 
+#### 4.1 CLIP: Contrastive Language Image Pre-training
+
+![image](https://user-images.githubusercontent.com/59663734/166175117-1857ebe4-7ccb-4562-ade4-ab08afcbe5ce.png)
+
+
+
+#### 4.1 VQGAN: Vector Quantized Generative Adversarial Network
+
 # Conclusion
 
 # References
