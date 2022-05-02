@@ -44,9 +44,9 @@
 
 4. Multimodal Generation
 
-       - CLIP: Contrastive Language Image Pre-training
-       - VQGAN: Vector Quantized Generative Adversarial Network
-       - CLIP + VQGAN
+     - CLIP: Contrastive Language Image Pre-training
+     - VQGAN: Vector Quantized Generative Adversarial Network
+     - CLIP + VQGAN
 
 
 ### 1. Understanding a Basic GAN
