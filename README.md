@@ -12,7 +12,7 @@
 
 ```10,000``` images were used to train a WGAN to generate people's face.
 
-2. The ImageNet dataset, one of the largest efforts in this space, required over ```25,000``` workers to annotate ```14 million``` images for ```22,000``` object categories. In contrast, CLIP learns from text–image pairs that are already publicly available on the internet. CLIP was trained on a vast (and ```unknown```) dataset of random internet material.
+2. The [ImageNet](https://image-net.org/download.php) dataset, one of the largest efforts in this space, required over ```25,000``` workers to annotate ```14 million``` images for ```22,000``` object categories. In contrast, CLIP learns from text–image pairs that are already publicly available on the internet. CLIP was trained on a vast (and ```unknown```) dataset of random internet material.
 
 ## Methods
 
