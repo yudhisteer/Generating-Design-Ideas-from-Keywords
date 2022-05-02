@@ -1291,6 +1291,11 @@ The revolutionary thing about CLIP is that it is capable of ```zero-shot learnin
 
 _Although VQGAN involves Transformers the models are not trained with text, but pure image data. They just apply the Transformer architecture that was previously used for text to images, which is an important innovation._
 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/166192236-864ef481-6987-4046-9458-30fe78ee808f.png" width="650" height="280"/>
+</p>
+
+
 
 #### 4.3 CLIP + VQGAN
 
