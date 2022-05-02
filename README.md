@@ -1258,6 +1258,10 @@ To sum up, controllable generation works by moving the noise vector in different
 ### 4. Multimodal GAN
 The model which we will use connects two existing (open-source, pretrained) models: CLIP (OpenAI) and VQGAN (Esser et al. from Heidelberg University). VQGAN+CLIP is a ```text-to-image``` model that generates images of variable size given a set of ```text prompts``` (and some other parameters).
 
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/166190852-27d11a8e-32fe-4a2a-ad28-705a2f13b3ce.png" width="500" height="350"/>
+</p>
+
 In essence, the way they work is that **VQGAN** ```generates``` the images, while **CLIP** ```judges``` how well an image matches the text prompt. This interaction guides the generator(VQGAN) to produce more accurate images.
 
 #### 4.1 CLIP: Contrastive Language Image Pre-training
@@ -1315,6 +1319,17 @@ We can use CLIP to guide a search through **VQGAN**’s ```latent space``` to fi
 **Note:**
 _Eventhough both VQGAN and CLIP models are pretrained when you use them in VQGAN, you basically train it (again) for every prompt you give to it. That is different to “normal” GANs where you train it one time (or you use a pretrained model) and then you just do inference in order to generate an image._
 
+The VQGAN-CLIP architecture kind of blurs the distinction of training-vs-inference, because when we “run” VQGAN-CLIP we’re kind of doing ```inference```, but we’re also ```optimizing```. This special case of inference has been called “inference-by-optimization”. That’s why we need a **GPU** to run VQGAN-CLIP.
+
+
+
+
+
+
+
+
+
+
 
 # Conclusion
 
@@ -1341,3 +1356,5 @@ _Eventhough both VQGAN and CLIP models are pretrained when you use them in VQGAN
 20. https://arxiv.org/abs/1411.1784
 21. https://alexasteinbruck.medium.com/explaining-the-code-of-the-popular-text-to-image-algorithm-vqgan-clip-a0c48697a7ff
 22. https://alexasteinbruck.medium.com/vqgan-clip-how-does-it-work-210a5dca5e52
+23. https://ljvmiranda921.github.io/notebook/2021/08/08/clip-vqgan/
+24. https://www.vice.com/en/article/n7bqj7/ai-generated-art-scene-explodes-as-hackers-create-groundbreaking-new-tools
