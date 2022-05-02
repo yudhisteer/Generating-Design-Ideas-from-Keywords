@@ -1307,7 +1307,8 @@ So how does it work:
 2. CLIP on the other hand takes in:
 - (a) an image, and outputs the image features; or
 - (b) a text, and outputs text features.
-- 
+
+
 The similarity between **image** and **text** can be represented by the ```cosine similarity``` of the learnt feature vectors.
 
 <p align="center">
@@ -1321,7 +1322,7 @@ _Eventhough both VQGAN and CLIP models are pretrained when you use them in VQGAN
 
 The VQGAN-CLIP architecture kind of blurs the distinction of training-vs-inference, because when we “run” VQGAN-CLIP we’re kind of doing ```inference```, but we’re also ```optimizing```. This special case of inference has been called “inference-by-optimization”. That’s why we need a **GPU** to run VQGAN-CLIP.
 
-
+We’re not training a VQGAN model and we’re also not training a CLIP model. Both models are already ```pretrained``` and their **weights** are ```frozen``` during the run of the notebook. What’s being optimised (or “trained”) is ```Z (noise)``` , the latent image vector that is being passed as an input to VQGAN.
 
 
 
