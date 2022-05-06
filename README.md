@@ -17,10 +17,10 @@ I would then move on to create a ```DCGAN``` (Deep Convolutional GAN) to generat
 
 Finally, VQGAN and CLIP would be used as a model to generate images from text prompts. It would have been hard to train a discriminator from scratch as the size of the labelled dataset needed would have been enormous. Hence, CLIP was essential to be used as the discriminator. The images generated is truly a masterpiece as it is quite evident that a human would never have come up with such peculiar design styles. 
 
-The left part of our brain is mainly for ```numerical```, ```analytical``` and ```logical``` process and most of the AI I have worked on before was based on this part of the brain - ```classify```, ````predict``` or ```recommend```. However, the ability to ```imagine```, ```create``` or ```design```` is based on the right hemisphere of the brain. Hence, the creation of an AI based on these abilities required a different type of wiring and understanding of the underlying concepts of imagination. The ability of creating ```something``` from ```nothing``` is truly marvelous and remaining to this day a mystery.  
+The left part of our brain is mainly for ```numerical```, ```analytical``` and ```logical``` process and most of the AI I have worked on before was based on this part of the brain: ```classify```, ```predict``` or ```recommend```. However, the ability to ```imagine```, ```create``` or ```design``` is based on the right hemisphere of the brain. Hence, the creation of an AI based on these abilities required a different type of wiring and understanding of the underlying concepts of imagination. The ability of creating ```something``` from ```nothing``` is truly marvelous and remaining to this day a mystery.  
 
 <p align="center">
-  <img src= "https://user-images.githubusercontent.com/59663734/167106633-b26418fb-192b-4f79-88c0-7328be6808ac.jpg" />
+  <img src= "https://user-images.githubusercontent.com/59663734/167106633-b26418fb-192b-4f79-88c0-7328be6808ac.jpg" width="700" height="400"/>
 </p>
 
 
