@@ -1,6 +1,6 @@
 # Generative AI: Generating Design Ideas from Keywords
 
-A generative adversarial network (GAN) is a class of machine learning frameworks designed by ```Ian Goodfellow``` and his colleagues in June ```2014```. Two neural networks **contest** with each other in a game (in the form of a ```zero-sum game```, where one agent's gain is another agent's loss).
+Generative adversarial network (GAN) was designed by ```Ian Goodfellow``` and his colleagues in June ```2014```. Two neural networks **contest** with each other in a game (in the form of a ```zero-sum game```, where one agent's gain is another agent's loss).
 
 Hard to believe that what once started as a problem that was pondered over a beer by the father of GAN itself, has now given machine's the gift to imagination. 
 
