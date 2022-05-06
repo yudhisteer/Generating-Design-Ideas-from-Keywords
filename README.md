@@ -11,19 +11,13 @@ Hard to believe that what once started as a problem that was pondered over a bee
 </p>
 
 ## Abstract
-When I first started this repository, I knew nothing about GAN. Not even that two AI was at war in a GAN. Being a complete novice, I had to start from the very bottom. So I would first explore how to create a GAN that would generate handwritten numbers based on the MNIST dataset using then not convolutional layers but fully connected hidden layers. 
+When I first started this repository, I knew nothing about GAN. Not even that two AI was at war in a GAN. Being a complete novice, I had to start from the very bottom. So I would first explore how to create a GAN that would generate handwritten numbers (0-9) based on the MNIST dataset using fully connected hidden layers. 
 
-I would then move on to use a DCGAN(Deep Convolutional GAN) to generate people's faces based on the Celeba Dataset. The DCGAN differ from a basic gan as follows: 
+I would then move on to use a DCGAN(Deep Convolutional GAN) to generate people's faces based on the Celeba Dataset. Trained for about ```10000``` epochs, the images were still pixelated but a discerning person's face was evident. This step was crucial in visualizng how noise is used as input to the generator and how with each step of training the generator is becoming better and better at fooling the discriminator.
 
-- Use convolutions without any pooling layers
-- Use batchnorm in both the generator and the discriminator
-- Don't use fully connected hidden layers
-- Use ReLU activation in the generator for all layers except for the output, which uses a Tanh activation.
-- Use LeakyReLU activation in the discriminator for all layers except for the output, which does not use an activation
+Finally, VQGAN and CLIP would be used as a model to generate images from text prompts. It would have been hard to train a discriminator from scratch as the size of the labelled dataset needed would have been enormous. Hence, CLIP was essential to be used as the discriminator. 
 
-Trained for about ```10000``` epochs, the images were still pixelated but a discerning person's face was evident. This step was crucial in visualizng how noise is used as input to the generator and how with each step of training the generator is becoming better and better at fooling the discriminator.
 
-Finally, VQGAN and CLIP would be used as a model to generate images from text prompts. 
 
 This project was inspired by the course Generative Adversarial Networks (GANs) Specialization on Coursera taught by Sharon Zhou. Most of the material below was inspired from the course. Kudos and credit to this amazing teacher.
 
@@ -39,6 +33,14 @@ This project was inspired by the course Generative Adversarial Networks (GANs) S
 2. The [ImageNet](https://image-net.org/download.php) dataset, one of the largest efforts in this space, required over ```25,000``` workers to annotate ```14 million``` images for ```22,000``` object categories. ```CLIP``` learns from text–image pairs that are already publicly available on the internet. CLIP was trained on a vast (and ```unknown```) dataset of random internet material. CLIP creates an encoding of its classes and is pre-trained on over ```400 million``` **text** to **image** pairs. This allows it to leverage transformer models' ability to extract semantic meaning from text to make image classifications out of the box without being fine-tuned on custom data.
 
 ## Methods
+
+2. The DCGAN differ from a basic gan as follows: 
+
+- Use convolutions without any pooling layers
+- Use batchnorm in both the generator and the discriminator
+- Don't use fully connected hidden layers
+- Use ReLU activation in the generator for all layers except for the output, which uses a Tanh activation.
+- Use LeakyReLU activation in the discriminator for all layers except for the output, which does not use an activation
 
 
 ## Plan of Action
