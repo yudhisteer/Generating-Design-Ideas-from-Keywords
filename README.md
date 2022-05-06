@@ -50,6 +50,8 @@
      - VQGAN: Vector Quantized Generative Adversarial Network
      - CLIP + VQGAN
 
+5. Application
+
 
 ### 1. Understanding a Basic GAN
 If you got a crush on any of those people below then I got a bad news for you. These people are not real! The images have actually been downloaded from the website [thispersondoesnotexist.com](https://this-person-does-not-exist.com/en). It is hard to believe that an AI can generate such realistic fake images of a person in matter of seconds but that is the reality in which we are actually living. This AI face generator is powered by ```StyleGAN```, a neural network from NVIDIA developed in 2018.
@@ -1351,6 +1353,12 @@ We’re not training a VQGAN model and we’re also not training a CLIP model. B
 **Forward pass**: We start with a noise vector ```z```, a VQGAN-encoded image vector, pass it to VQGAN to synthesize/decode an actual image out of it, then we cut it into pieces, then we encode these pieces with CLIP, calculate the distance to the text prompt and get out some loss(es).
 
 **Backward pass**: We backpropagate through ```CLIP``` and ```VQGAN``` all the way back to the latent vector ```z``` and then use gradient ascent to update ```z```.
+
+### 5. Application
+
+
+
+https://user-images.githubusercontent.com/59663734/167097246-2ff1d572-6f78-434e-b829-88f887581149.mp4
 
 
 
