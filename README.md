@@ -1386,6 +1386,12 @@ The VQGAN-CLIP architecture kind of blurs the distinction of training-vs-inferen
 **Backward pass**: We backpropagate through ```CLIP``` and ```VQGAN``` all the way back to the latent vector ```z``` and then use gradient ascent to update ```z```.
 
 ### 5. Application
+![image](https://user-images.githubusercontent.com/59663734/167107702-3cd42a24-440e-4933-b9cf-1ebd8110a87e.png)
+
+![image](https://user-images.githubusercontent.com/59663734/167107912-b15bb4ca-9e78-4eb1-9d61-dc9f1fc73091.png)
+
+
+![image](https://user-images.githubusercontent.com/59663734/167107808-93d950eb-a0ac-4537-8e50-48f533f81bd8.png)
 
 
 
