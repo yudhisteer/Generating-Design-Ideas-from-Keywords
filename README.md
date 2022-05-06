@@ -1399,11 +1399,16 @@ https://user-images.githubusercontent.com/59663734/167097246-2ff1d572-6f78-434e-
 
 
 
+## Further Improvement
 
-
-
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/167108796-74d4f6ee-93d3-45cd-9ad5-0dcc9e05bd27.png"/>
+</p>
 
 # Conclusion
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/167108517-dbafe9b5-5dfb-4538-a4de-792725c42fc6.png"/>
+</p>
 
 # References
 1. https://www.youtube.com/watch?v=xkqflKC64IM&t=489s
