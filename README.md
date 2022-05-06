@@ -2,6 +2,8 @@
 
 ## Abstract
 
+This project was inspired by the course Generative Adversarial Networks (GANs) Specialization on Coursera taught by Sharon Zhou. Most of the material below was inspired from the course. Kudos and credit to this amazing teacher.
+
 
 ## Datasets
 1.  CelebFaces Attributes Dataset ([CelebA](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)) is a large-scale face attributes dataset with more than ```200K``` celebrity images, each with ```40``` attribute annotations.
@@ -1272,6 +1274,8 @@ To sum up, controllable generation works by moving the noise vector in different
 
 ##### 3.2.2 Challenges of Controllable GAN
 
+
+A lot of the material in the section below was inspired by the medium post of Alexa Steinbrück. A truly marvelous explanation that depicts in the simplest way possible the architecture of VQGAN and CLIP. Major credit goes to the author. 
 
 ### 4. Multimodal GAN
 The model which we will use connects two existing (open-source, pretrained) models: CLIP (OpenAI) and VQGAN (Esser et al. from Heidelberg University). VQGAN+CLIP is a ```text-to-image``` model that generates images of variable size given a set of ```text prompts``` (and some other parameters).
