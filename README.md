@@ -1,9 +1,31 @@
 # Generative AI: Generating Design Ideas from Keywords
 
+A generative adversarial network (GAN) is a class of machine learning frameworks designed by ```Ian Goodfellow``` and his colleagues in June ```2014```. Two neural networks **contest** with each other in a game (in the form of a ```zero-sum game```, where one agent's gain is another agent's loss).
+
+Hard to believe that what once started as a problem that was pondered over a beer by the father of GAN itself, has now given machine's the gift to imagination. 
+
+> While deep-learning AIs can learn to ```recognize``` things, they have not been good at ```creating``` them. The goal of GANs is to give machines something akin to an ```imagination```. In the future, computers will get much better at feasting on raw data and working out what they need to learn from it. Doing so wouldn’t merely enable them to draw pretty pictures or compose music; it would make them less reliant on humans to instruct them about the world and the way it works
+
+<p align="center">
+  <img src= "https://user-images.githubusercontent.com/59663734/167101458-5c0eebf1-e1e9-468c-b947-dd3fa02f7f5a.jpg" />
+</p>
+
 ## Abstract
+When I first started this repository, I knew nothing about GAN. Not even that two AI was at war in a GAN. Being a complete novice, I had to start from the very bottom. So I would first explore how to create a GAN that would generate handwritten numbers based on the MNIST dataset using then not convolutional layers but fully connected hidden layers. 
+
+I would then move on to use a DCGAN(Deep Convolutional GAN) to generate people's faces based on the Celeba Dataset. The DCGAN differ from a basic gan as follows: 
+
+- Use convolutions without any pooling layers
+- Use batchnorm in both the generator and the discriminator
+- Don't use fully connected hidden layers
+- Use ReLU activation in the generator for all layers except for the output, which uses a Tanh activation.
+- Use LeakyReLU activation in the discriminator for all layers except for the output, which does not use an activation
+
+Trained for about ```10000``` epochs, the images were still pixelated but a discerning person's face was evident. This step was crucial in visualizng how noise is used as input to the generator and how with each step of training the generator is becoming better and better at fooling the discriminator.
+
+Finally, VQGAN and CLIP would be used as a model to generate images from text prompts. 
 
 This project was inspired by the course Generative Adversarial Networks (GANs) Specialization on Coursera taught by Sharon Zhou. Most of the material below was inspired from the course. Kudos and credit to this amazing teacher.
-
 
 ## Datasets
 1.  CelebFaces Attributes Dataset ([CelebA](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)) is a large-scale face attributes dataset with more than ```200K``` celebrity images, each with ```40``` attribute annotations.
@@ -14,9 +36,7 @@ This project was inspired by the course Generative Adversarial Networks (GANs) S
 
 ```10,000``` images were used to train a WGAN to generate people's face.
 
-2. The [ImageNet](https://image-net.org/download.php) dataset, one of the largest efforts in this space, required over ```25,000``` workers to annotate ```14 million``` images for ```22,000``` object categories. 
-
-3. ```CLIP``` learns from text–image pairs that are already publicly available on the internet. CLIP was trained on a vast (and ```unknown```) dataset of random internet material. CLIP creates an encoding of its classes and is pre-trained on over ```400 million``` **text** to **image** pairs. This allows it to leverage transformer models' ability to extract semantic meaning from text to make image classifications out of the box without being fine-tuned on custom data.
+2. The [ImageNet](https://image-net.org/download.php) dataset, one of the largest efforts in this space, required over ```25,000``` workers to annotate ```14 million``` images for ```22,000``` object categories. ```CLIP``` learns from text–image pairs that are already publicly available on the internet. CLIP was trained on a vast (and ```unknown```) dataset of random internet material. CLIP creates an encoding of its classes and is pre-trained on over ```400 million``` **text** to **image** pairs. This allows it to leverage transformer models' ability to extract semantic meaning from text to make image classifications out of the box without being fine-tuned on custom data.
 
 ## Methods
 
@@ -1284,7 +1304,7 @@ The model which we will use connects two existing (open-source, pretrained) mode
   <img src= "https://user-images.githubusercontent.com/59663734/166190852-27d11a8e-32fe-4a2a-ad28-705a2f13b3ce.png" width="500" height="350"/>
 </p>
 
-In essence, the way they work is that **VQGAN** ```generates``` the images, while **CLIP** ```judges``` how well an image matches the text prompt. This interaction guides the generator(VQGAN) to produce more accurate images.
+> In essence, the way they work is that **VQGAN** ```generates``` the images, while **CLIP** ```judges``` how well an image matches the text prompt. This interaction guides the generator(VQGAN) to produce more accurate images.
 
 #### 4.1 CLIP: Contrastive Language Image Pre-training
 
@@ -1323,9 +1343,9 @@ _Although VQGAN involves Transformers the models are not trained with text, but 
 
 **CLIP** ```guides``` **VQGAN** towards an image that is the best match to a given text.
 
-Note that contrary to VQGAN, CLIP is not a generative model. CLIP is “just” trained to represent both text and images very well. The revolutionary thing about CLIP is that it is capable of zero-shot learning. That means that it performs exceptionally well on previously unseen datasets
+Note that contrary to VQGAN, CLIP is not a generative model. CLIP is “just” trained to represent both text and images very well.
 
-“CLIP is a model that was originally intended for doing things like searching for the best match to a description like “a dog playing the violin” among a number of images. By pairing a network that can produce images (a “generator” of some sort) with CLIP, it is possible to tweak the generator’s input to try to match a description.”
+ >_CLIP is a model that was originally intended for doing things like searching for the best match to a description like “a dog playing the violin” among a number of images. By pairing a network that can produce images (a “generator” of some sort) with CLIP, it is possible to tweak the generator’s input to try to match a description._
 
 So how does it work:
 
@@ -1345,14 +1365,14 @@ The similarity between **image** and **text** can be represented by the ```cosin
 We can use CLIP to guide a search through **VQGAN**’s ```latent space``` to find images that match a text prompt very well according to **CLIP**.
 
 **Note:**
-_Eventhough both VQGAN and CLIP models are pretrained when you use them in VQGAN, you basically train it (again) for every prompt you give to it. That is different to “normal” GANs where you train it one time (or you use a pretrained model) and then you just do inference in order to generate an image._
+> _Eventhough both VQGAN and CLIP models are pretrained when you use them in VQGAN, you basically train it (again) for every prompt you give to it. That is different to “normal” GANs where you train it one time (or you use a pretrained model) and then you just do inference in order to generate an image._
 
 The VQGAN-CLIP architecture kind of blurs the distinction of training-vs-inference, because when we “run” VQGAN-CLIP we’re kind of doing ```inference```, but we’re also ```optimizing```. This special case of inference has been called “inference-by-optimization”. That’s why we need a **GPU** to run VQGAN-CLIP.
 
 ![image](https://user-images.githubusercontent.com/59663734/166194451-be9a25dc-d254-4948-994e-cc4da0400140.png)
 
 
-We’re not training a VQGAN model and we’re also not training a CLIP model. Both models are already ```pretrained``` and their **weights** are ```frozen``` during the run of the notebook. What’s being optimised (or “trained”) is ```Z (noise)``` , the latent image vector that is being passed as an input to VQGAN.
+> We’re not training a VQGAN model and we’re also not training a CLIP model. Both models are already ```pretrained``` and their **weights** are ```frozen``` during the run of the notebook. What’s being optimised (or “trained”) is ```Z (noise)``` , the latent image vector that is being passed as an input to VQGAN.
 
 **Forward pass**: We start with a noise vector ```z```, a VQGAN-encoded image vector, pass it to VQGAN to synthesize/decode an actual image out of it, then we cut it into pieces, then we encode these pieces with CLIP, calculate the distance to the text prompt and get out some loss(es).
 
