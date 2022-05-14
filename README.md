@@ -47,6 +47,7 @@ The DCGAN differ from a basic gan as follows:
 - Use ReLU activation in the generator for all layers except for the output, which uses a Tanh activation.
 - Use LeakyReLU activation in the discriminator for all layers except for the output, which does not use an activation
 
+-------------------
 
 ## Plan of Action
 1. Understanding a Basic GAN
@@ -81,6 +82,7 @@ The DCGAN differ from a basic gan as follows:
 
 5. Application
 
+-------------------
 
 ### 1. Understanding a Basic GAN
 If you got a crush on any of those people below then I got a bad news for you. These people are not real! The images have actually been downloaded from the website [thispersondoesnotexist.com](https://this-person-does-not-exist.com/en). It is hard to believe that an AI can generate such realistic fake images of a person in matter of seconds but that is the reality in which we are actually living. This AI face generator is powered by ```StyleGAN```, a neural network from NVIDIA developed in 2018.
