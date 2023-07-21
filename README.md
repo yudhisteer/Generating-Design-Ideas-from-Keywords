@@ -1198,8 +1198,8 @@ With time, the loss of the critic drops to become negative, i.e, it outputs a sm
 
 Below is the results of the training. The first ```200``` steps are just **noise** with no particular structure in the data. But with time, we can clearly see some facial features appearing in the noise at about ```800``` steps. At the end of ```6000``` steps, we successfully generate faces while not very high definition. 
 
-https://user-images.githubusercontent.com/59663734/165896265-f9494889-6ab6-4958-914a-b00985b9d06f.mp4
-
+<video src="https://user-images.githubusercontent.com/59663734/165896265-f9494889-6ab6-4958-914a-b00985b9d06f.mp4" controls="controls" style="max-width: 730px;">
+</video>
 
 ##### 2.7.7 Testing
 With our model saved, we will use the generator and scrape out the discriminator to generate new faces from noise. 
