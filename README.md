@@ -1397,8 +1397,8 @@ The VQGAN-CLIP architecture kind of blurs the distinction of training-vs-inferen
 
 
 
-https://user-images.githubusercontent.com/59663734/167097246-2ff1d572-6f78-434e-b829-88f887581149.mp4
-
+<video src="https://user-images.githubusercontent.com/59663734/167097246-2ff1d572-6f78-434e-b829-88f887581149.mp4" controls="controls" style="max-width: 730px;">
+</video>
 
 
 ## Further Improvement
